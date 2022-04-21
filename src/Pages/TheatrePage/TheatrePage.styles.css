@@ -1,0 +1,94 @@
+.big-card {
+  border-radius: 10px;
+  box-shadow: 0 1.6rem 3.2rem rgba(29, 28, 28, 0.3);
+  overflow: hidden;
+}
+.date-picker {
+  height: 3rem;
+  justify-content: center;
+}
+
+.shows-box {
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+
+.span-class-2 {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.seat-classification {
+  justify-content: center;
+}
+
+.seat-classification {
+  font-size: 2rem;
+}
+
+/* Seat box */
+
+.box,
+.box {
+  display: flex;
+  align-items: center;
+
+  gap: 2rem;
+}
+
+.seat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.naming-class {
+  height: 2rem;
+  width: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat-section-header {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  align-items: center;
+}
+
+.icn {
+  font-size: 1.6rem;
+  border-radius: 50%;
+  box-shadow: 0 1.6rem 3.2rem rgba(255, 255, 255, 0.3);
+}
+.icn:hover {
+  transform: scale(1.3);
+}
+
+.seat-selected {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  color: #74b816;
+}
+
+.confirm-btn {
+  width: 20rem;
+}
+.booked-icon {
+  color: #d9480f;
+}
+.reserved-icon {
+  color: #74c0fc;
+}
+.icon-button {
+  border: none;
+}
