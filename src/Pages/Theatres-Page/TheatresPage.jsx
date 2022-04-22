@@ -23,55 +23,58 @@ const TheatresPage = () => {
   }, [])
   return (
     <div className='container'>
-      <h1> Select your movie</h1>
       {theatresLoading && <Loader />}
+
       {theatres ? (
-        <section className='theatres-section'>
-          {theatres.map((theatre, index) => {
-            return (
-              <Card className='movie-card' key={index}>
-                <Card.Img
-                  variant='top'
-                  src={theatre.currentMovie.poster}
-                  alt={theatre.currentMovie.movieName}
-                  className='img-box'
-                />
-                <div className='movie-box margin-bottom-sm'>
-                  <Card.Title className='movie-name'>
-                    {theatre.currentMovie.movieName} (
-                    {theatre.currentMovie.rating})
-                  </Card.Title>
-                  <Card.Text className='margin-bottom-sm'>
-                    <span className='span-class casting'>Starring : </span>{' '}
-                    <span className='cast'> {theatre.currentMovie.cast}</span>
-                  </Card.Text>
-                  <Card.Text className='margin-bottom-sm'>
-                    <span className='span-class directing'>Director : </span>
-                    <span className='cast'>
-                      {theatre.currentMovie.director}{' '}
-                    </span>
-                  </Card.Text>
-                  <Card.Title className='theatre-name margin-bottom-sm'>
-                    {theatre.theatreName}
-                  </Card.Title>
-                  <div className='shows margin-bottom-sm'>
-                    {theatre.showTimings.map((show) => (
-                      <Badge bg='primary' className='show-time'>
-                        {show}
-                      </Badge>
-                    ))}
+        <>
+          <h1>Select Your seats</h1>
+          <section className='theatres-section'>
+            {theatres.map((theatre, index) => {
+              return (
+                <Card className='movie-card' key={index}>
+                  <Card.Img
+                    variant='top'
+                    src={theatre.currentMovie.poster}
+                    alt={theatre.currentMovie.movieName}
+                    className='img-box'
+                  />
+                  <div className='movie-box margin-bottom-sm'>
+                    <Card.Title className='movie-name'>
+                      {theatre.currentMovie.movieName} (
+                      {theatre.currentMovie.rating})
+                    </Card.Title>
+                    <Card.Text className='margin-bottom-sm'>
+                      <span className='span-class casting'>Starring : </span>{' '}
+                      <span className='cast'> {theatre.currentMovie.cast}</span>
+                    </Card.Text>
+                    <Card.Text className='margin-bottom-sm'>
+                      <span className='span-class directing'>Director : </span>
+                      <span className='cast'>
+                        {theatre.currentMovie.director}{' '}
+                      </span>
+                    </Card.Text>
+                    <Card.Title className='theatre-name margin-bottom-sm'>
+                      {theatre.theatreName}
+                    </Card.Title>
+                    <div className='shows margin-bottom-sm'>
+                      {theatre.showTimings.map((show) => (
+                        <Badge bg='primary' className='show-time'>
+                          {show}
+                        </Badge>
+                      ))}
+                    </div>
+                    <Button
+                      variant='success'
+                      className='btn'
+                      onClick={() => handleClick(theatre._id)}>
+                      Book Tickets
+                    </Button>
                   </div>
-                  <Button
-                    variant='success'
-                    className='btn'
-                    onClick={() => handleClick(theatre._id)}>
-                    Book Tickets
-                  </Button>
-                </div>
-              </Card>
-            )
-          })}
-        </section>
+                </Card>
+              )
+            })}
+          </section>
+        </>
       ) : (
         ''
       )}

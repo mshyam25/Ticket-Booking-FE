@@ -8,6 +8,7 @@ import {
   Card,
   Button,
 } from 'react-bootstrap'
+import Loader from '../../Components/Loader/Loader'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Badge } from 'react-bootstrap'
@@ -87,6 +88,7 @@ const TheatrePage = () => {
   return (
     <>
       <div className='container'>
+        {loadingTheatre && <Loader />}
         <Card className='big-card'>
           {theatre ? (
             <div className='seat-section'>
