@@ -78,7 +78,7 @@ const Header = () => {
               {userInfo ? (
                 <a
                   className='main-nav-link nav-cta'
-                  href='#'
+                  href='/signin'
                   onClick={userLogout}>
                   LOGOUT
                 </a>

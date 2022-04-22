@@ -10,9 +10,10 @@ import {
   confirmSeatReducer,
 } from './reducers/seatReducer'
 import {
-  findUserReducer,
   passwordResetReducer,
   securityConfirmReducer,
+  userFindReducer,
+  userRegisterReducer,
   userSignInReducer,
 } from './reducers/userReducer'
 
@@ -22,7 +23,8 @@ const reducer = combineReducers({
   confirmSeat: confirmSeatReducer,
   clearReservedSeats: clearReservedSeatsReducer,
   userSignIn: userSignInReducer,
-  findUser: findUserReducer,
+  userRegister: userRegisterReducer,
+  userFind: userFindReducer,
   securityConfirm: securityConfirmReducer,
   passwordReset: passwordResetReducer,
 })

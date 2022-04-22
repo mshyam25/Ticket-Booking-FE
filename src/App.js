@@ -4,6 +4,8 @@ import Header from './Components/Header/Header'
 import TheatrePage from './Pages/TheatrePage/TheatrePage'
 import TheatresPage from './Pages/Theatres-Page/TheatresPage'
 import SignIn from './Pages/Sign-In-Page/SignIn'
+import ForgotPasswordPage from './Pages/Forgotpassword-Page/ForgotPasswordPage'
+import SignUp from './Pages/Sign-Up-Page/SignUp'
 
 function App() {
   return (
@@ -14,7 +16,8 @@ function App() {
         <Route path='/theatres' element={<TheatresPage />} />
         <Route path='/theatres/:id' element={<TheatrePage />} />
         <Route path='/signin' element={<SignIn />} />
-        <Route path='/forgotpassword' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
       </Routes>
     </main>
   )

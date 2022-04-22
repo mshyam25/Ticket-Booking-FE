@@ -40,6 +40,38 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem('currentUser')
 }
 
+//USER REGISTRATION
+
+export const registerUser = (name, email, password) => async (dispatch) => {
+  try {
+    dispatch({ type: userConstants.USER_REGISTER_REQUEST })
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+
+    const { data } = await axios.post(
+      `${API}/users`,
+      { name, email, password },
+      config
+    )
+
+    dispatch({ type: userConstants.USER_REGISTER_SUCCESS, payload: data })
+    dispatch({ type: userConstants.USER_LOGIN_SUCCESS, payload: data })
+    localStorage.setItem('currentUser', JSON.stringify(data))
+  } catch (error) {
+    dispatch({
+      type: userConstants.USER_REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
 //FIND USER BY EMAIL
 
 export const findUser = (email) => async (dispatch) => {
@@ -70,85 +102,31 @@ export const findUser = (email) => async (dispatch) => {
   }
 }
 
-//CONFIRM USER BASED ON SECURITY QUESTION
+// //CONFIRM USER BASED ON SECURITY QUESTION
 
-export const confirmUser = (email, securityAnswer) => async (dispatch) => {
-  try {
-    dispatch({ type: userConstants.USER_SECURITY_CONFIRMATION_REQUEST })
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-
-    const { data } = await axios.post(
-      `${API}/users/userconfirmation`,
-      { email, securityAnswer },
-      config
-    )
-
-    dispatch({
-      type: userConstants.USER_SECURITY_CONFIRMATION_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: userConstants.USER_SECURITY_CONFIRMATION_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    })
-  }
-}
-
-//UPDATE PASSOWRD
-
-export const updatePassword =
-  (email, password) => async (dispatch, getState) => {
-    try {
-      dispatch({ type: userConstants.USER_PASSWORD_RESET_REQUEST })
-
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      }
-
-      const { data } = await axios.put(
-        `${API}/users/passwordreset`,
-        { email, password },
-        config
-      )
-
-      dispatch({
-        type: userConstants.USER_PASSWORD_RESET_SUCCESS,
-        payload: data,
-      })
-    } catch (error) {
-      dispatch({
-        type: userConstants.USER_PASSWORD_RESET_FAIL,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message,
-      })
-    }
-  }
-
-// export const getSecurityQuestions = () => async (dispatch) => {
+// export const confirmUser = (email, securityAnswer) => async (dispatch) => {
 //   try {
-//     dispatch({ type: userConstants.USER_SECURITY_QUESTIONS_REQUEST })
+//     dispatch({ type: userConstants.USER_SECURITY_CONFIRMATION_REQUEST })
 
-//     const { data } = await axios.get(`${API}/users/securityquestions`)
+//     const config = {
+//       headers: {
+//         'Content-Type': 'application/json',
+//       },
+//     }
+
+//     const { data } = await axios.post(
+//       `${API}/users/userconfirmation`,
+//       { email, securityAnswer },
+//       config
+//     )
+
 //     dispatch({
-//       type: userConstants.USER_SECURITY_QUESTIONS_SUCCESS,
+//       type: userConstants.USER_SECURITY_CONFIRMATION_SUCCESS,
 //       payload: data,
 //     })
 //   } catch (error) {
 //     dispatch({
-//       type: userConstants.USER_SECURITY_QUESTIONS_FAIL,
+//       type: userConstants.USER_SECURITY_CONFIRMATION_FAIL,
 //       payload:
 //         error.response && error.response.data.message
 //           ? error.response.data.message
@@ -157,11 +135,12 @@ export const updatePassword =
 //   }
 // }
 
-// export const registerUser =
-//   (name, email, password, securityQues, securityQuestionAnswer) =>
-//   async (dispatch) => {
+// //UPDATE PASSOWRD
+
+// export const updatePassword =
+//   (email, password) => async (dispatch, getState) => {
 //     try {
-//       dispatch({ type: userConstants.USER_REGISTER_REQUEST })
+//       dispatch({ type: userConstants.USER_PASSWORD_RESET_REQUEST })
 
 //       const config = {
 //         headers: {
@@ -169,18 +148,19 @@ export const updatePassword =
 //         },
 //       }
 
-//       const { data } = await axios.post(
-//         `${API}/users`,
-//         { name, email, password, securityQues, securityQuestionAnswer },
+//       const { data } = await axios.put(
+//         `${API}/users/passwordreset`,
+//         { email, password },
 //         config
 //       )
 
-//       dispatch({ type: userConstants.USER_REGISTER_SUCCESS, payload: data })
-//       // dispatch({ type: userConstants.USER_LOGIN_SUCCESS, payload: data })
-//       // localStorage.setItem('currentUser', JSON.stringify(data))
+//       dispatch({
+//         type: userConstants.USER_PASSWORD_RESET_SUCCESS,
+//         payload: data,
+//       })
 //     } catch (error) {
 //       dispatch({
-//         type: userConstants.USER_REGISTER_FAIL,
+//         type: userConstants.USER_PASSWORD_RESET_FAIL,
 //         payload:
 //           error.response && error.response.data.message
 //             ? error.response.data.message
@@ -188,6 +168,26 @@ export const updatePassword =
 //       })
 //     }
 //   }
+
+// // export const getSecurityQuestions = () => async (dispatch) => {
+// //   try {
+// //     dispatch({ type: userConstants.USER_SECURITY_QUESTIONS_REQUEST })
+
+// //     const { data } = await axios.get(`${API}/users/securityquestions`)
+// //     dispatch({
+// //       type: userConstants.USER_SECURITY_QUESTIONS_SUCCESS,
+// //       payload: data,
+// //     })
+// //   } catch (error) {
+// //     dispatch({
+// //       type: userConstants.USER_SECURITY_QUESTIONS_FAIL,
+// //       payload:
+// //         error.response && error.response.data.message
+// //           ? error.response.data.message
+// //           : error.message,
+// //     })
+// //   }
+// // }
 
 // export const getUserDetails = () => async (dispatch, getState) => {
 //   try {

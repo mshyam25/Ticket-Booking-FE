@@ -3,22 +3,35 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-
 import TextField from '@mui/material/TextField'
 import { Button } from 'react-bootstrap'
-import { userLogIn } from '../../redux/actions/userActions'
-import './Signin.styles.css'
 import Loader from '../../Components/Loader/Loader'
 import Message from '../../Components/Message/Message'
-const SignIn = () => {
+import './SignUp.styles.css'
+import { registerUser } from '../../redux/actions/userActions'
+
+const SignUp = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const textFieldStyles = { style: { fontSize: 18 } }
 
   const userSignIn = useSelector((state) => state.userSignIn)
-  const { loading, success, error, userInfo } = userSignIn
+  const {
+    loading: loadingUserInfo,
+    error: errorUserInfo,
+    userInfo: user,
+  } = userSignIn
+  const userRegister = useSelector((state) => state.userRegister)
+  const { loading, success, error, userInfo } = userRegister
 
   const formValidation = yup.object({
+    name: yup
+      .string()
+      .required('Name is required')
+      .matches(
+        '^[a-zA-Z ]{2,16}$',
+        'Name should be minimum 2 characters and oly letters are allowed'
+      ),
     email: yup
       .string()
       .required('Email is required')
@@ -28,36 +41,60 @@ const SignIn = () => {
     //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
     //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
     // ),
+    confirmpassword: yup.string().required('Password is required'),
+    // .matches(
+    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+    // ),
   })
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({
-      initialValues: { email: '', password: '' },
+      initialValues: { name: '', email: '', password: '', confirmpassword: '' },
       validationSchema: formValidation,
       onSubmit: () => {
-        dispatch(userLogIn(values.email, values.password))
-        console.log('Signed in')
+        if (values.password === values.confirmpassword) {
+          dispatch(registerUser(values.name, values.email, values.password))
+        } else {
+          alert('Passwords do not match')
+        }
       },
     })
 
   useEffect(() => {
-    if (userInfo) {
+    if (user && success) {
       setTimeout(() => {
-        navigate('/')
-      }, 5000)
+        navigate('/signin')
+      }, 4000)
     }
   }, [userInfo])
   return (
     <>
+      {loading && <Loader />}
+      {user && success ? (
+        <Message variant='success' children='User Log in Successfull' />
+      ) : (
+        ''
+      )}
       <div className='container form-section'>
-        <span className='signin-header'>SIGN IN PAGE</span>
-        {loading && <Loader />}
-        {success ? (
-          <Message variant='success' children='User Log in Successfull' />
-        ) : (
-          error && <Message variant='danger' children={error} />
-        )}
+        <span className='signin-header'>SIGN UP PAGE</span>
+
         <form onSubmit={handleSubmit} className='form-container'>
+          <TextField
+            InputProps={textFieldStyles}
+            InputLabelProps={textFieldStyles}
+            id='name'
+            name='name'
+            value={values.name}
+            label='Name'
+            variant='outlined'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.name && touched.name}
+          />
+          <span className='text-field'>
+            {errors.name && touched.name ? errors.name : ''}
+          </span>
           <TextField
             InputProps={textFieldStyles}
             InputLabelProps={textFieldStyles}
@@ -89,23 +126,29 @@ const SignIn = () => {
           <span className='text-field'>
             {errors.password && touched.password ? errors.password : ''}
           </span>
-          <a href='/#' className='text-field'>
-            Forgot password ?
-          </a>
+          <TextField
+            InputProps={textFieldStyles}
+            InputLabelProps={textFieldStyles}
+            id='confirmpassword'
+            name='confirmpassword'
+            value={values.confirmpassword}
+            label='Confirm Password'
+            variant='outlined'
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={errors.confirmpassword && touched.confirmpassword}
+          />
+          <span className='text-field'>
+            {errors.confirmpassword && touched.confirmpassword
+              ? errors.confirmpassword
+              : ''}
+          </span>
+
           <Button type='submit'>Sign in</Button>
-
-          <span className='text-field'>
-            If you have recently registered, please confirm your email and try
-            sign in.
-          </span>
-
-          <span className='text-field'>
-            New Customer ? <Link to='/signup'>Sign Up</Link>
-          </span>
         </form>
       </div>
     </>
   )
 }
 
-export default SignIn
+export default SignUp
