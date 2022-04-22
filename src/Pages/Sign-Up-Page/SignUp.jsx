@@ -62,20 +62,20 @@ const SignUp = () => {
     })
 
   useEffect(() => {
-    if (user && success) {
-      setTimeout(() => {
-        navigate('/signin')
-      }, 4000)
+    if (userInfo) {
+      navigate('/signin')
     }
-  }, [userInfo])
+  }, [user, userInfo])
   return (
     <>
       {loading && <Loader />}
-      {user && success ? (
-        <Message variant='success' children='User Log in Successfull' />
-      ) : (
-        ''
+      {userInfo && (
+        <Message
+          variant='success'
+          children='User Registration Completed.Please check your Email for Verification Link.'
+        />
       )}
+      {error && <Message variant='danger'>{error}</Message>}
       <div className='container form-section'>
         <span className='signin-header'>SIGN UP PAGE</span>
 

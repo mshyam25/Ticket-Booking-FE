@@ -6,6 +6,7 @@ import TheatresPage from './Pages/Theatres-Page/TheatresPage'
 import SignIn from './Pages/Sign-In-Page/SignIn'
 import ForgotPasswordPage from './Pages/Forgotpassword-Page/ForgotPasswordPage'
 import SignUp from './Pages/Sign-Up-Page/SignUp'
+import Verificationemail from './Pages/Verificationemail-Page/Verificationemail'
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
+        <Route
+          path='/verificationemail/:email'
+          element={<Verificationemail />}
+        />
       </Routes>
     </main>
   )

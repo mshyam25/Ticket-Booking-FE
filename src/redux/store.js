@@ -16,8 +16,10 @@ import {
   userRegisterReducer,
   userSignInReducer,
 } from './reducers/userReducer'
+import { verificationEmailReducer } from './reducers/verificationReducer'
 
 const reducer = combineReducers({
+  verificationEmail: verificationEmailReducer,
   theatresList: theatresListReducer,
   theatreById: theatreByIdReducer,
   confirmSeat: confirmSeatReducer,
