@@ -71,9 +71,10 @@
 .seat-selected {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  padding: 3rem 1rem;
 }
 
 .selected {
@@ -91,4 +92,16 @@
 }
 .icon-button {
   border: none;
+}
+
+.s-b-flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.s-b-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  justify-items: center;
 }

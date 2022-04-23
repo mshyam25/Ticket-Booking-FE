@@ -8,6 +8,7 @@ import ForgotPasswordPage from './Pages/Forgotpassword-Page/ForgotPasswordPage'
 import SignUp from './Pages/Sign-Up-Page/SignUp'
 import Verificationemail from './Pages/Verificationemail-Page/Verificationemail'
 import PasswordResetPage from './Pages/PasswordReset-Page/PasswordResetPage'
+import PaymentGatewayPage from './Pages/PaymentGateway-Page/PaymentGateway-Page'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<h1>Landing Page</h1>} />
+        <Route path='/paymentgateway' element={<PaymentGatewayPage />} />
         <Route path='/theatres' element={<TheatresPage />} />
         <Route path='/theatres/:id' element={<TheatrePage />} />
         <Route path='/signin' element={<SignIn />} />

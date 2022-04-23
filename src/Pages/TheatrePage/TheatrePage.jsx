@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import {
-  Container,
   Row,
   Col,
   ListGroup,
@@ -18,19 +17,19 @@ import Moment from 'moment'
 import { getTheatreById } from '../../redux/actions/theatreActions'
 import './TheatrePage.styles.css'
 import { confirmMySeats } from '../../redux/actions/seatActions'
+import { bookingConstants } from '../../redux/constants/bookingConstants'
 const TheatrePage = () => {
   const [time, setTime] = useState(null)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
   const [color, setColor] = useState(false)
   const [seats, setSeats] = useState([])
   const [seatId, setSeatId] = useState([])
-  // let maxDate
-  // // const max = date.setDate(date.getDate() + theatre.runningDays)
-
+  // const [ticketsPrice, setTicketsPrice] = useState(0)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
-
+  const userSignIn = useSelector((state) => state.userSignIn)
+  const { userInfo } = userSignIn
   const theatreById = useSelector((state) => state.theatreById)
   const { loading: loadingTheatre, error: errorTheatre, theatre } = theatreById
   const confirmSeat = useSelector((state) => state.confirmSeat)
@@ -55,11 +54,12 @@ const TheatrePage = () => {
     })
   }
   if (time && date) {
-    console.log(time)
-    console.log(date)
     findSeats(time, date)
   }
 
+  const ticketsPrice = 130
+  const taxPrice = ticketsPrice * 0.1
+  const totalPrice = ticketsPrice + taxPrice
   const handleSeatSelection = async (s, e) => {
     setColor(!color)
     if (!seats.includes(s.name)) {
@@ -79,10 +79,30 @@ const TheatrePage = () => {
     const theatreId = theatre._id
     const booking = { theatreId, date, time, seatId }
     dispatch(confirmMySeats(booking))
-    navigate('/')
+    dispatch({
+      type: bookingConstants.BOOKING_ITEMS_ADD,
+      payload: {
+        userId: userInfo._id,
+        userName: userInfo.name,
+        bookingDetails: [
+          {
+            theatre: theatre.theatreName,
+            date: date,
+            showTime: time,
+            qty: seats.length,
+          },
+        ],
+        taxPrice,
+        totalPrice,
+      },
+    })
+    navigate('/paymentgateway')
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate('/signin')
+    }
     dispatch(getTheatreById(params.id))
   }, [dispatch, confirmation, clearance])
   return (
@@ -245,35 +265,58 @@ const TheatrePage = () => {
                         </Row>
                       </ListGroupItem>
                       {seats.length > 0 ? (
-                        <ListGroupItem className='seat-selected'>
-                          <span className='span-class-2 margin-right-sm'>
-                            You have Selected :
-                          </span>
-                          <div className='flex-box'>
-                            {seats.map((s) => {
-                              return (
-                                <span className='span-class-2 margin-right-sm'>
-                                  {s}
-                                </span>
-                              )
-                            })}
-                          </div>
+                        <ListGroup className='seat-selected'>
+                          <div className='s-b-grid'>
+                            <span className='span-class-2'>Theatre :</span>
+                            <span className='span-class-2'>
+                              {theatre.theatreName}
+                            </span>
+                            <span className='span-class-2'>Movie :</span>
+                            <span className='span-class-2'>
+                              {theatre.currentMovie.movieName}
+                            </span>
+                            <span className='span-class-2'>Date :</span>
+                            <span className='span-class-2'>{date}</span>
+                            <span className='span-class-2'>Show Time :</span>
+                            <span className='span-class-2'>{time}</span>
+                            <span className='span-class-2'>
+                              Seats Selected :
+                            </span>
+                            <div className='s-b-flex'>
+                              {seats.map((s) => {
+                                return (
+                                  <span className='span-class-2'>{s},</span>
+                                )
+                              })}
+                            </div>
 
-                          <span className='span-class-2 margin-right-sm'>
-                            Total Seats : {seats.length}
-                          </span>
-                          <span className='span-class-2 margin-right-sm'>
-                            {' '}
-                            Total Cost : Rs.{' '}
-                            {seats.length * theatre.ticketPrice}
-                          </span>
+                            <span className='span-class-2 '>Total Seats :</span>
+                            <span className='span-class-2 '>
+                              {seats.length}
+                            </span>
+                            <span className='span-class-2'>Ticket Price :</span>
+                            <span className='span-class-2 '>
+                              Rs.
+                              {ticketsPrice}
+                            </span>
+                            <span className='span-class-2 '>Tax Price :</span>
+                            <span className='span-class-2 '>
+                              Rs.
+                              {taxPrice}
+                            </span>
+                            <span className='span-class-2 '>Total Price :</span>
+                            <span className='span-class-2 '>
+                              Rs.
+                              {totalPrice}
+                            </span>
+                          </div>
                           <Button
                             onClick={() => confirmingSeats()}
                             variant='success'
                             className='confirm-btn'>
                             Confirm Seats
                           </Button>
-                        </ListGroupItem>
+                        </ListGroup>
                       ) : (
                         <ListGroupItem className='seat-selected'>
                           {' '}

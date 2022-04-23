@@ -10,19 +10,29 @@ export const confirmMySeats = (booking) => async (dispatch) => {
         'Content-type': 'application/json',
       },
     }
-    console.log(booking)
+
     const { data } = await axios.post(
       `${API}/seats/confirmation`,
       booking,
       config
     )
-    dispatch({ type: seatConstants.SEAT_CONFIRMATION_SUCCESS, payload: data })
-    // const { data: clearanceData } = await axios.post(
-    //   `${API}/seats/clearingreserved`,
-    //   booking,
-    //   config
-    // )
-    clearSeats(booking)
+    dispatch({
+      type: seatConstants.SEAT_CONFIRMATION_SUCCESS,
+      payload: data,
+    })
+    console.log('HELLO')
+    dispatch({ type: seatConstants.SEAT_RESERVED_CLEARANCE_REQUEST })
+
+    const { data: clearanceData } = await axios.post(
+      `${API}/seats/clearingreserved`,
+      booking,
+      config
+    )
+    dispatch({
+      type: seatConstants.SEAT_RESERVED_CLEARANCE_SUCCESS,
+      payload: clearanceData,
+    })
+    // clearSeats(booking)
   } catch (error) {
     dispatch({
       type: seatConstants.SEAT_CONFIRMATION_FAIL,

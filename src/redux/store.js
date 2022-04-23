@@ -19,6 +19,7 @@ import {
   userUpdateReducer,
 } from './reducers/userReducer'
 import { verificationEmailReducer } from './reducers/verificationReducer'
+import { bookingItemsReducer } from './reducers/bookingReducer'
 
 const reducer = combineReducers({
   verificationEmail: verificationEmailReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   userFind: userFindReducer,
   passwordResetLink: passwordResetLinkReducer,
   userUpdate: userUpdateReducer,
+  bookingItems: bookingItemsReducer,
 })
 
 const middleware = [thunk]
