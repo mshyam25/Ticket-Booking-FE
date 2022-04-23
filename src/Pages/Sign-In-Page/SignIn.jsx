@@ -16,7 +16,7 @@ const SignIn = () => {
   const textFieldStyles = { style: { fontSize: 18 } }
 
   const userSignIn = useSelector((state) => state.userSignIn)
-  const { loading, success, error, userInfo } = userSignIn
+  const { loading, success, error, userInfo, registered } = userSignIn
 
   const formValidation = yup.object({
     email: yup
@@ -57,6 +57,12 @@ const SignIn = () => {
           <Message variant='success' children='User Log in Successfull' />
         ) : (
           error && <Message variant='danger' children={error} />
+        )}
+        {registered && (
+          <Message
+            variant='success'
+            children='Account is Created.A Verification Email has been sent to your account'
+          />
         )}
         <form onSubmit={handleSubmit} className='form-container'>
           <TextField

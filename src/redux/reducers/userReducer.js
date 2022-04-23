@@ -10,6 +10,8 @@ export const userSignInReducer = (state = { userInfo: {} }, action) => {
       return { loading: false, error: action.payload }
     case userConstants.USER_LOGOUT:
       return {}
+    case userConstants.USER_LOGIN_RESET:
+      return { registered: true }
     default:
       return state
   }

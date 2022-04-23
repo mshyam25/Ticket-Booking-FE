@@ -9,6 +9,7 @@ import Loader from '../../Components/Loader/Loader'
 import Message from '../../Components/Message/Message'
 import './SignUp.styles.css'
 import { registerUser } from '../../redux/actions/userActions'
+import { userConstants } from '../../redux/constants/userConstants'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -63,6 +64,7 @@ const SignUp = () => {
 
   useEffect(() => {
     if (userInfo) {
+      dispatch({ type: userConstants.USER_LOGIN_RESET })
       navigate('/signin')
     }
   }, [user, userInfo])
