@@ -11,12 +11,12 @@ const Verificationemail = () => {
   const dispatch = useDispatch()
   const verificationEmail = useSelector((state) => state.verificationEmail)
   const { loading, error, message } = verificationEmail
-  console.log(error)
+
   const sendVerificationLink = () => {
     dispatch(verificationEmailTrigger(params.email))
   }
   return (
-    <div className='container verification-box'>
+    <div className='container align-center-box'>
       {loading ? (
         <Loader />
       ) : error ? (

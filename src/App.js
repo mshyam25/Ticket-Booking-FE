@@ -7,6 +7,7 @@ import SignIn from './Pages/Sign-In-Page/SignIn'
 import ForgotPasswordPage from './Pages/Forgotpassword-Page/ForgotPasswordPage'
 import SignUp from './Pages/Sign-Up-Page/SignUp'
 import Verificationemail from './Pages/Verificationemail-Page/Verificationemail'
+import PasswordResetPage from './Pages/PasswordReset-Page/PasswordResetPage'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/forgotpassword' element={<ForgotPasswordPage />} />
+        <Route path='/passwordreset/:email' element={<PasswordResetPage />} />
         <Route
           path='/verificationemail/:email'
           element={<Verificationemail />}

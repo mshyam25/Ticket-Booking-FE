@@ -10,11 +10,13 @@ import {
   confirmSeatReducer,
 } from './reducers/seatReducer'
 import {
+  passwordResetLinkReducer,
   passwordResetReducer,
   securityConfirmReducer,
   userFindReducer,
   userRegisterReducer,
   userSignInReducer,
+  userUpdateReducer,
 } from './reducers/userReducer'
 import { verificationEmailReducer } from './reducers/verificationReducer'
 
@@ -27,8 +29,8 @@ const reducer = combineReducers({
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
   userFind: userFindReducer,
-  securityConfirm: securityConfirmReducer,
-  passwordReset: passwordResetReducer,
+  passwordResetLink: passwordResetLinkReducer,
+  userUpdate: userUpdateReducer,
 })
 
 const middleware = [thunk]

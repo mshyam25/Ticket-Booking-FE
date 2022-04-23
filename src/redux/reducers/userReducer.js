@@ -1,19 +1,5 @@
 import { userConstants } from '../constants/userConstants'
 
-// export const securityQuestionsReducer = (state = { security: [] }, action) => {
-//   switch (action.type) {
-//     case userConstants.USER_SECURITY_QUESTIONS_REQUEST:
-//       return { loading: true, security: [] }
-//     case userConstants.USER_SECURITY_QUESTIONS_SUCCESS:
-//       return { loading: false, security: action.payload }
-//     case userConstants.USER_SECURITY_QUESTIONS_FAIL:
-//       return { loading: false, error: action.payload }
-
-//     default:
-//       return state
-//   }
-// }
-
 export const userSignInReducer = (state = { userInfo: {} }, action) => {
   switch (action.type) {
     case userConstants.USER_LOGIN_REQUEST:
@@ -59,32 +45,29 @@ export const userFindReducer = (state = { user: {} }, action) => {
   }
 }
 
-export const securityConfirmReducer = (state = {}, action) => {
+export const passwordResetLinkReducer = (state = {}, action) => {
   switch (action.type) {
-    case userConstants.USER_SECURITY_CONFIRMATION_REQUEST:
+    case userConstants.USER_PASSWORD_RESET_LINK_REQUEST:
       return { ...state, loading: true }
-    case userConstants.USER_SECURITY_CONFIRMATION_SUCCESS:
-      return { loading: false, success: true }
-    case userConstants.USER_SECURITY_CONFIRMATION_FAIL:
+    case userConstants.USER_PASSWORD_RESET_LINK_SUCCESS:
+      return { loading: false, success: action.payload }
+    case userConstants.USER_PASSWORD_RESET_LINK_FAIL:
       return { loading: false, error: action.payload }
-    case userConstants.USER_SECURITY_CONFIRMATION_RESET:
-      return {}
 
     default:
       return state
   }
 }
 
-export const passwordResetReducer = (state = {}, action) => {
+export const userUpdateReducer = (state = { updatedUser: {} }, action) => {
   switch (action.type) {
-    case userConstants.USER_PASSWORD_RESET_REQUEST:
-      return { ...state, loading: true }
-    case userConstants.USER_PASSWORD_RESET_SUCCESS:
-      return { loading: false, success: action.payload }
-    case userConstants.USER_PASSWORD_RESET_FAIL:
+    case userConstants.USER_UPDATE_REQUEST:
+      return { loading: true }
+    case userConstants.USER_UPDATE_SUCCESS:
+      return { loading: false, success: true, updatedUser: action.payload }
+    case userConstants.USER_UPDATE_FAIL:
       return { loading: false, error: action.payload }
-    case userConstants.USER_PASSWORD_RESET_RESET:
-      return {}
+
     default:
       return state
   }
@@ -99,20 +82,6 @@ export const passwordResetReducer = (state = {}, action) => {
 //     case userConstants.USER_DETAILS_FAIL:
 //       return { loading: false, error: action.payload }
 //     case userConstants.USER_DETAILS_RESET:
-//       return { loading: false, error: action.payload }
-
-//     default:
-//       return state
-//   }
-// }
-
-// export const userUpdateReducer = (state = { updatedUser: {} }, action) => {
-//   switch (action.type) {
-//     case userConstants.USER_UPDATE_REQUEST:
-//       return { loading: true }
-//     case userConstants.USER_UPDATE_SUCCESS:
-//       return { loading: false, success: true, updatedUser: action.payload }
-//     case userConstants.USER_UPDATE_FAIL:
 //       return { loading: false, error: action.payload }
 
 //     default:

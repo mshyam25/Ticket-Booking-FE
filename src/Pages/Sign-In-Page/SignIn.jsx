@@ -36,7 +36,8 @@ const SignIn = () => {
       validationSchema: formValidation,
       onSubmit: () => {
         dispatch(userLogIn(values.email, values.password))
-        console.log('Signed in')
+        values.email = ''
+        values.password = ''
       },
     })
 
@@ -44,7 +45,7 @@ const SignIn = () => {
     if (userInfo) {
       setTimeout(() => {
         navigate('/')
-      }, 5000)
+      }, 4000)
     }
   }, [userInfo])
   return (
@@ -89,7 +90,7 @@ const SignIn = () => {
           <span className='text-field'>
             {errors.password && touched.password ? errors.password : ''}
           </span>
-          <a href='/#' className='text-field'>
+          <a href='/forgotpassword' className='text-field'>
             Forgot password ?
           </a>
           <Button type='submit'>Sign in</Button>
