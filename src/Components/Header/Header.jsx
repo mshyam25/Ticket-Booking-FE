@@ -18,25 +18,14 @@ const Header = () => {
     <>
       <header className='header'>
         <nav className='main-nav'>
-          <img
-            className='logo'
-            alt='Omnifood-logo'
-            src='img/omnifood-logo.png'
-          />
           <ul className='main-nav-list'>
             <li>
               <a className='main-nav-link' href='/'>
-                HOME
-              </a>
-            </li>
-            <li>
-              <a className='main-nav-link' href='/theatres'>
-                BOOK TICKETS
-              </a>
-            </li>
-            <li>
-              <a className='main-nav-link' href='/offers'>
-                VIEW OFFERS
+                <img
+                  className='logo'
+                  alt='Omnifood-logo'
+                  src='img/omnifood-logo.png'
+                />
               </a>
             </li>
           </ul>
@@ -51,8 +40,20 @@ const Header = () => {
                     PROFILE
                   </a>
                 </li>
+              </>
+            )}
+            {userInfo && !userInfo.isAdmin && (
+              <>
+                {' '}
                 <li>
-                  <a className='main-nav-link' href='/'>
+                  <a className='main-nav-link' href='/theatres'>
+                    BOOK TICKETS
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className='main-nav-link'
+                    href={`/userbookings/${userInfo._id}`}>
                     MY BOOKINGS
                   </a>
                 </li>
@@ -66,9 +67,10 @@ const Header = () => {
                     USERS
                   </a>
                 </li>
+
                 <li>
-                  <a className='main-nav-link' href='/bookings'>
-                    BOOKINGS
+                  <a className='main-nav-link' href='/theatres'>
+                    THEATRES
                   </a>
                 </li>
               </>

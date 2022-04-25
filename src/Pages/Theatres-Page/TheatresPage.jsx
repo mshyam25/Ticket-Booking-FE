@@ -7,12 +7,16 @@ import './TheatresPage.styles.css'
 import { getAllTheatres } from '../../redux/actions/theatreActions'
 const TheatresPage = () => {
   const dispatch = useDispatch()
+
   const theatresList = useSelector((state) => state.theatresList)
   const {
     loading: theatresLoading,
     error: theatresError,
     theatres,
   } = theatresList
+
+  const userSignIn = useSelector((state) => state.userSignIn)
+  const { userInfo } = userSignIn
 
   const navigate = useNavigate()
   const handleClick = (id) => {
@@ -63,12 +67,39 @@ const TheatresPage = () => {
                         </Badge>
                       ))}
                     </div>
-                    <Button
-                      variant='success'
-                      className='btn'
-                      onClick={() => handleClick(theatre._id)}>
-                      Book Tickets
-                    </Button>
+                    {!userInfo.isAdmin ? (
+                      <Button
+                        variant='success'
+                        className='btn'
+                        onClick={() => handleClick(theatre._id)}>
+                        Book Tickets
+                      </Button>
+                    ) : (
+                      <>
+                        <Button
+                          variant='success'
+                          className='btn'
+                          onClick={() => handleClick(theatre._id)}>
+                          Book Tickets
+                        </Button>
+                        <Button
+                          variant='info'
+                          className='btn'
+                          onClick={() =>
+                            navigate(`/theatrebookings/${theatre._id}`)
+                          }>
+                          View Bookings
+                        </Button>
+                        <Button
+                          variant='warning'
+                          className='btn'
+                          onClick={() =>
+                            navigate(`/edittheatre/${theatre._id}`)
+                          }>
+                          Edit Theatre
+                        </Button>
+                      </>
+                    )}
                   </div>
                 </Card>
               )

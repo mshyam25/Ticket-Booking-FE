@@ -15,6 +15,7 @@ import {
   passwordResetReducer,
   securityConfirmReducer,
   userFindReducer,
+  userListReducer,
   userRegisterReducer,
   userSignInReducer,
   userUpdateReducer,
@@ -23,6 +24,8 @@ import { verificationEmailReducer } from './reducers/verificationReducer'
 import {
   bookingItemsReducer,
   newBookingReducer,
+  theatreBookingsReducer,
+  userBookingsReducer,
 } from './reducers/bookingReducer'
 
 const reducer = combineReducers({
@@ -35,10 +38,13 @@ const reducer = combineReducers({
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
   userFind: userFindReducer,
+  userList: userListReducer,
   passwordResetLink: passwordResetLinkReducer,
   userUpdate: userUpdateReducer,
   bookingItems: bookingItemsReducer,
   newBooking: newBookingReducer,
+  theatreBookings: theatreBookingsReducer,
+  userBookings: userBookingsReducer,
 })
 
 const middleware = [thunk]

@@ -9,7 +9,9 @@ import SignUp from './Pages/Sign-Up-Page/SignUp'
 import Verificationemail from './Pages/Verificationemail-Page/Verificationemail'
 import PasswordResetPage from './Pages/PasswordReset-Page/PasswordResetPage'
 import PaymentGatewayPage from './Pages/PaymentGateway-Page/PaymentGateway-Page'
-
+import UsersListPage from './Pages/UsersListPage/UsersListPage'
+import UserBookingsPage from './Pages/UserBookings-Page/UserBookingsPage'
+import TheatreBookingsPage from './Pages/TheatreBookings-Page/TheatreBookingsPage'
 function App() {
   return (
     <main>
@@ -19,6 +21,9 @@ function App() {
         <Route path='/paymentgateway' element={<PaymentGatewayPage />} />
         <Route path='/theatres' element={<TheatresPage />} />
         <Route path='/theatres/:id' element={<TheatrePage />} />
+        <Route path='/users' element={<UsersListPage />} />
+        <Route path='/userbookings/:id' element={<UserBookingsPage />} />
+        <Route path='/theatrebookings/:id' element={<TheatreBookingsPage />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/forgotpassword' element={<ForgotPasswordPage />} />

@@ -3,14 +3,47 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
-
 import TextField from '@mui/material/TextField'
 import { Button } from 'react-bootstrap'
 import { userLogIn } from '../../redux/actions/userActions'
 import './Signin.styles.css'
 import Loader from '../../Components/Loader/Loader'
 import Message from '../../Components/Message/Message'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 const SignIn = () => {
+  const errorToast = (msg) =>
+    toast.error(msg, {
+      position: 'top-right',
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  const successToast = (msg) =>
+    toast.success(msg, {
+      position: 'top-right',
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
+  const infoToast = (msg) =>
+    toast.info(msg, {
+      position: 'top-right',
+      autoClose: 8000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const textFieldStyles = { style: { fontSize: 18 } }
@@ -51,19 +84,16 @@ const SignIn = () => {
   return (
     <>
       <div className='container form-section'>
+        <ToastContainer />
         <span className='signin-header'>SIGN IN PAGE</span>
         {loading && <Loader />}
-        {success ? (
-          <Message variant='success' children='User Log in Successfull' />
-        ) : (
-          error && <Message variant='danger' children={error} />
-        )}
-        {registered && (
-          <Message
-            variant='success'
-            children='Account is Created.A Verification Email has been sent to your account'
-          />
-        )}
+        {success
+          ? successToast('User is Signed In')
+          : error && errorToast(error)}
+        {registered &&
+          infoToast(
+            'Account created. Verification Mail is sent.Please Verify your account.'
+          )}
         <form onSubmit={handleSubmit} className='form-container'>
           <TextField
             InputProps={textFieldStyles}
