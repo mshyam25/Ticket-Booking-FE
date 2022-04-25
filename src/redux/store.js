@@ -6,6 +6,7 @@ import {
   theatreByIdReducer,
 } from './reducers/theatreReducer'
 import {
+  bookSeatReducer,
   clearReservedSeatsReducer,
   confirmSeatReducer,
 } from './reducers/seatReducer'
@@ -19,7 +20,10 @@ import {
   userUpdateReducer,
 } from './reducers/userReducer'
 import { verificationEmailReducer } from './reducers/verificationReducer'
-import { bookingItemsReducer } from './reducers/bookingReducer'
+import {
+  bookingItemsReducer,
+  newBookingReducer,
+} from './reducers/bookingReducer'
 
 const reducer = combineReducers({
   verificationEmail: verificationEmailReducer,
@@ -27,12 +31,14 @@ const reducer = combineReducers({
   theatreById: theatreByIdReducer,
   confirmSeat: confirmSeatReducer,
   clearReservedSeats: clearReservedSeatsReducer,
+  bookSeat: bookSeatReducer,
   userSignIn: userSignInReducer,
   userRegister: userRegisterReducer,
   userFind: userFindReducer,
   passwordResetLink: passwordResetLinkReducer,
   userUpdate: userUpdateReducer,
   bookingItems: bookingItemsReducer,
+  newBooking: newBookingReducer,
 })
 
 const middleware = [thunk]

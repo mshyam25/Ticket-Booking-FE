@@ -9,3 +9,16 @@ export const bookingItemsReducer = (state = {}, action) => {
       return state
   }
 }
+export const newBookingReducer = (state = {}, action) => {
+  switch (action.type) {
+    case bookingConstants.NEW_BOOKING_REQUEST:
+      return { loading: true }
+    case bookingConstants.NEW_BOOKING_SUCCESS:
+      return { loading: false, success: true }
+    case bookingConstants.NEW_BOOKING_FAIL:
+      return { loading: false, error: action.payload }
+
+    default:
+      return state
+  }
+}

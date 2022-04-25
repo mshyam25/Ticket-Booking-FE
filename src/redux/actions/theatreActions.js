@@ -18,10 +18,19 @@ export const getAllTheatres = () => async (dispatch) => {
   }
 }
 
-export const getTheatreById = (id) => async (dispatch) => {
+export const getTheatreById = (id) => async (dispatch, getState) => {
+  const {
+    userSignIn: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
   try {
     dispatch({ type: theatreConstants.THEATRE_BY_ID_REQUEST })
-    const { data } = await axios.get(`${API}/theatres/${id}`)
+    const { data } = await axios.get(`${API}/theatres/${id}`, config)
     dispatch({ type: theatreConstants.THEATRE_BY_ID_SUCCESS, payload: data })
   } catch (error) {
     dispatch({

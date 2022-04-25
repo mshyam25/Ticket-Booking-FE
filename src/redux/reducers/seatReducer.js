@@ -25,3 +25,16 @@ export const clearReservedSeatsReducer = (state = {}, action) => {
       return state
   }
 }
+
+export const bookSeatReducer = (state = {}, action) => {
+  switch (action.type) {
+    case seatConstants.SEAT_BOOKING_REQUEST:
+      return { loading: true }
+    case seatConstants.SEAT_BOOKING_SUCCESS:
+      return { loading: false, success: true }
+    case seatConstants.SEAT_BOOKING_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}

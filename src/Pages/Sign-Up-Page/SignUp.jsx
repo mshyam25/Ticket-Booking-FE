@@ -31,7 +31,7 @@ const SignUp = () => {
       .required('Name is required')
       .matches(
         '^[a-zA-Z ]{2,16}$',
-        'Name should be minimum 2 characters and oly letters are allowed'
+        'Name should be minimum 2 characters and only letters are allowed'
       ),
     email: yup
       .string()
@@ -56,11 +56,17 @@ const SignUp = () => {
       onSubmit: () => {
         if (values.password === values.confirmpassword) {
           dispatch(registerUser(values.name, values.email, values.password))
+          values.name = ''
+          values.email = ''
+          values.password = ''
+          values.confirmpassword = ''
         } else {
           alert('Passwords do not match')
         }
       },
     })
+
+  const defaultValues = () => {}
 
   useEffect(() => {
     if (userInfo) {

@@ -8,6 +8,7 @@ import {
   Button,
 } from 'react-bootstrap'
 import Loader from '../../Components/Loader/Loader'
+
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Badge } from 'react-bootstrap'
@@ -18,6 +19,7 @@ import { getTheatreById } from '../../redux/actions/theatreActions'
 import './TheatrePage.styles.css'
 import { confirmMySeats } from '../../redux/actions/seatActions'
 import { bookingConstants } from '../../redux/constants/bookingConstants'
+import Message from '../../Components/Message/Message'
 const TheatrePage = () => {
   const [time, setTime] = useState(null)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -28,12 +30,16 @@ const TheatrePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
+
   const userSignIn = useSelector((state) => state.userSignIn)
   const { userInfo } = userSignIn
+
   const theatreById = useSelector((state) => state.theatreById)
   const { loading: loadingTheatre, error: errorTheatre, theatre } = theatreById
+
   const confirmSeat = useSelector((state) => state.confirmSeat)
   const { loading: loadingConfirmSeat, confirmation, error } = confirmSeat
+
   const clearReservedSeats = useSelector((state) => state.clearReservedSeats)
   const {
     loading: loadingClearance,
@@ -83,16 +89,12 @@ const TheatrePage = () => {
       type: bookingConstants.BOOKING_ITEMS_ADD,
       payload: {
         userId: userInfo._id,
-        userName: userInfo.name,
-        bookingDetails: [
-          {
-            theatre: theatre.theatreName,
-            date: date,
-            showTime: time,
-            qty: seats.length,
-          },
-        ],
-        taxPrice,
+        theatreId: theatre._id,
+        date: date,
+        showTime: time,
+        seatCount: seats.length,
+        seats: seats,
+        seatId,
         totalPrice,
       },
     })
@@ -108,7 +110,12 @@ const TheatrePage = () => {
   return (
     <>
       <div className='container'>
-        {loadingTheatre && <Loader />}
+        {loadingTheatre ||
+          loadingClearance ||
+          (loadingConfirmSeat && <Loader />)}
+        {error && <Message variant='danger'>{error}</Message>}
+        {errorTheatre && <Message variant='danger'>{errorTheatre}</Message>}
+        {errorClearance && <Message variant='danger'>{errorClearance}</Message>}
         <Card className='big-card'>
           {theatre ? (
             <div className='seat-section'>
