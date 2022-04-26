@@ -13,11 +13,12 @@ import Moment from 'moment'
 import { ToastContainer, toast } from 'react-toastify'
 import Checkbox from '@material-ui/core/Checkbox'
 import { addTheatre } from '../../redux/actions/theatreActions'
+import { theatreConstants } from '../../redux/constants/theatreConstants'
 const AddNewTheatrePage = () => {
   const [state, setState] = useState({
-    '10.30 A.M': true,
+    '10.30 A.M': false,
     '2.30 P.M': false,
-    '6.30 P.M': true,
+    '6.30 P.M': false,
     '10.30 P.M': false,
     '4:30 A.M': false,
     '7.30 A.M': false,
@@ -118,7 +119,7 @@ const AddNewTheatrePage = () => {
       validationSchema: formValidation,
       onSubmit: () => {
         values.showTimings = shows
-
+        dispatch({ type: theatreConstants.ADD_THEATRE_RESET })
         dispatch(addTheatre(values))
       },
     })
@@ -353,7 +354,6 @@ const AddNewTheatrePage = () => {
           <FormControlLabel
             control={
               <Checkbox
-                checked
                 onChange={handleCheckChange}
                 name='10.30 A.M'
                 color='primary'
@@ -374,7 +374,6 @@ const AddNewTheatrePage = () => {
           <FormControlLabel
             control={
               <Checkbox
-                checked
                 onChange={handleCheckChange}
                 name='6.30 P.M'
                 color='primary'

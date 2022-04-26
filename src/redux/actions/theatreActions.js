@@ -71,3 +71,28 @@ export const addTheatre = (newTheatre) => async (dispatch, getState) => {
     })
   }
 }
+
+export const updateTheatre = (theatre, id) => async (dispatch, getState) => {
+  const {
+    userSignIn: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
+  try {
+    dispatch({ type: theatreConstants.EDIT_THEATRE_REQUEST })
+    const { data } = await axios.put(`${API}/theatres/${id}`, theatre, config)
+    dispatch({ type: theatreConstants.EDIT_THEATRE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: theatreConstants.EDIT_THEATRE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}

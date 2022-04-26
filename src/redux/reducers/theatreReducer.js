@@ -33,6 +33,23 @@ export const newTheatreReducer = (state = {}, action) => {
       return { loading: false, success: true }
     case theatreConstants.ADD_THEATRE_FAIL:
       return { loading: false, error: action.payload }
+    case theatreConstants.ADD_THEATRE_RESET:
+      return {}
+    default:
+      return state
+  }
+}
+
+export const editTheatreReducer = (state = {}, action) => {
+  switch (action.type) {
+    case theatreConstants.EDIT_THEATRE_REQUEST:
+      return { ...state, loading: true }
+    case theatreConstants.EDIT_THEATRE_SUCCESS:
+      return { loading: false, success: action.payload }
+    case theatreConstants.EDIT_THEATRE_FAIL:
+      return { loading: false, error: action.payload }
+    case theatreConstants.EDIT_THEATRE_RESET:
+      return {}
     default:
       return state
   }

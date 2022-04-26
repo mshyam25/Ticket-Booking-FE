@@ -73,6 +73,11 @@ const Header = () => {
                     THEATRES
                   </a>
                 </li>
+                <li>
+                  <a className='main-nav-link' href='/addtheatre'>
+                    ADD THEATRE
+                  </a>
+                </li>
               </>
             )}
 

@@ -3,15 +3,33 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
+
+//Styling Imports
 import TextField from '@mui/material/TextField'
 import { Button } from 'react-bootstrap'
-import Loader from '../../Components/Loader/Loader'
-import Message from '../../Components/Message/Message'
-import './SignUp.styles.css'
+
+//Action Imports
 import { registerUser } from '../../redux/actions/userActions'
 import { userConstants } from '../../redux/constants/userConstants'
 
+//Toaster,Loader,CSS
+import Loader from '../../Components/Loader/Loader'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import './SignUp.styles.css'
+
 const SignUp = () => {
+  const errorToast = (msg) =>
+    toast.error(msg, {
+      position: 'top-center',
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const textFieldStyles = { style: { fontSize: 18 } }
@@ -22,8 +40,9 @@ const SignUp = () => {
     error: errorUserInfo,
     userInfo: user,
   } = userSignIn
+
   const userRegister = useSelector((state) => state.userRegister)
-  const { loading, success, error, userInfo } = userRegister
+  const { loading, success, error: errorRegister, userInfo } = userRegister
 
   const formValidation = yup.object({
     name: yup
@@ -61,7 +80,7 @@ const SignUp = () => {
           values.password = ''
           values.confirmpassword = ''
         } else {
-          alert('Passwords do not match')
+          errorToast('Passwords do not match')
         }
       },
     })
@@ -69,19 +88,18 @@ const SignUp = () => {
   useEffect(() => {
     if (userInfo) {
       dispatch({ type: userConstants.USER_LOGIN_RESET })
+
       navigate('/signin')
     }
-  }, [user, userInfo])
+    if (errorRegister) {
+      errorToast(errorRegister)
+    }
+  }, [user, errorRegister, userInfo])
   return (
     <>
+      <ToastContainer />
       {loading && <Loader />}
-      {userInfo && (
-        <Message
-          variant='success'
-          children='User Registration Completed.Please check your Email for Verification Link.'
-        />
-      )}
-      {error && <Message variant='danger'>{error}</Message>}
+
       <div className='container form-section'>
         <span className='signin-header'>SIGN UP PAGE</span>
 

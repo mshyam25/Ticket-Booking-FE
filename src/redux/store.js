@@ -5,6 +5,7 @@ import {
   theatresListReducer,
   theatreByIdReducer,
   newTheatreReducer,
+  editTheatreReducer,
 } from './reducers/theatreReducer'
 import {
   bookSeatReducer,
@@ -32,6 +33,7 @@ import {
 const reducer = combineReducers({
   verificationEmail: verificationEmailReducer,
   newTheatre: newTheatreReducer,
+  editTheatre: editTheatreReducer,
   theatresList: theatresListReducer,
   theatreById: theatreByIdReducer,
   confirmSeat: confirmSeatReducer,
