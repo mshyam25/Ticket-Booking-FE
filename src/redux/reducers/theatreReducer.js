@@ -24,3 +24,16 @@ export const theatreByIdReducer = (state = {}, action) => {
       return state
   }
 }
+
+export const newTheatreReducer = (state = {}, action) => {
+  switch (action.type) {
+    case theatreConstants.ADD_THEATRE_REQUEST:
+      return { ...state, loading: true }
+    case theatreConstants.ADD_THEATRE_SUCCESS:
+      return { loading: false, success: true }
+    case theatreConstants.ADD_THEATRE_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}

@@ -32,15 +32,15 @@ const EditTheatrePage = () => {
       initialValues: {
         theatreName: theatre.theatreName,
         movieName: theatre.currentMovie.movieName,
-        cast: theatre.currentMovie.cast,
+        cast: theatre.currtentMovie.cas,
         poster: theatre.currentMovie.poster,
         director: theatre.currentMovie.director,
         language: theatre.currentMovie.language,
         runtime: theatre.currentMovie.runtime,
         rating: theatre.currentMovie.rating,
         theatreArea: theatre.theatreArea,
-        releaseDate: '',
-        lastDate: '',
+        releaseDate: theatre.releaseDate,
+        lastDate: theatre.lastDate,
         ticketPrice: theatre.ticketPrice,
         showTimings: theatre.showTimings,
       },
@@ -59,9 +59,11 @@ const EditTheatrePage = () => {
   }, [dispatch, userInfo])
   return (
     <>
-      {theatre ? (
-        <>
-          <form onSubmit={handleSubmit} className='form-container'>
+      {loadingTheatre ? (
+        <Loader />
+      ) : theatre ? (
+        <div className='container '>
+          <form onSubmit={handleSubmit} className='form-container '>
             <TextField
               InputProps={textFieldStyles}
               InputLabelProps={textFieldStyles}
@@ -245,7 +247,7 @@ const EditTheatrePage = () => {
 
             <Button type='submit'>Update</Button>
           </form>
-        </>
+        </div>
       ) : (
         <h3>Invalid Theatre Id</h3>
       )}

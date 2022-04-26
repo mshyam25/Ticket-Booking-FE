@@ -80,6 +80,14 @@ const SignIn = () => {
         navigate('/')
       }, 4000)
     }
+    if (success) {
+      successToast('User is Signed In')
+    }
+    if (registered)
+      infoToast(
+        'Account created. Verification Mail is sent.Please Verify your account.'
+      )
+    if (error) errorToast(error)
   }, [userInfo])
   return (
     <>
@@ -87,13 +95,7 @@ const SignIn = () => {
         <ToastContainer />
         <span className='signin-header'>SIGN IN PAGE</span>
         {loading && <Loader />}
-        {success
-          ? successToast('User is Signed In')
-          : error && errorToast(error)}
-        {registered &&
-          infoToast(
-            'Account created. Verification Mail is sent.Please Verify your account.'
-          )}
+
         <form onSubmit={handleSubmit} className='form-container'>
           <TextField
             InputProps={textFieldStyles}

@@ -42,3 +42,32 @@ export const getTheatreById = (id) => async (dispatch, getState) => {
     })
   }
 }
+
+export const addTheatre = (newTheatre) => async (dispatch, getState) => {
+  const {
+    userSignIn: { userInfo },
+  } = getState()
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`,
+    },
+  }
+  try {
+    dispatch({ type: theatreConstants.ADD_THEATRE_REQUEST })
+    const { data } = await axios.post(
+      `${API}/theatres/addtheatre`,
+      newTheatre,
+      config
+    )
+    dispatch({ type: theatreConstants.ADD_THEATRE_SUCCESS, payload: data })
+  } catch (error) {
+    dispatch({
+      type: theatreConstants.ADD_THEATRE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}

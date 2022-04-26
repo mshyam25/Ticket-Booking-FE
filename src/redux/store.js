@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import {
   theatresListReducer,
   theatreByIdReducer,
+  newTheatreReducer,
 } from './reducers/theatreReducer'
 import {
   bookSeatReducer,
@@ -30,6 +31,7 @@ import {
 
 const reducer = combineReducers({
   verificationEmail: verificationEmailReducer,
+  newTheatre: newTheatreReducer,
   theatresList: theatresListReducer,
   theatreById: theatreByIdReducer,
   confirmSeat: confirmSeatReducer,

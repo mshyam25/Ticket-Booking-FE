@@ -20,6 +20,7 @@ import './TheatrePage.styles.css'
 import { confirmMySeats } from '../../redux/actions/seatActions'
 import { bookingConstants } from '../../redux/constants/bookingConstants'
 import Message from '../../Components/Message/Message'
+
 const TheatrePage = () => {
   const [time, setTime] = useState(null)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
@@ -27,6 +28,7 @@ const TheatrePage = () => {
   const [seats, setSeats] = useState([])
   const [seatId, setSeatId] = useState([])
   // const [ticketsPrice, setTicketsPrice] = useState(0)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
@@ -47,10 +49,17 @@ const TheatrePage = () => {
     errorClearance,
   } = clearReservedSeats
 
+  const ticketsPrice =
+    theatre && seats ? Number(theatre.ticketPrice * seats.length) : 0
+  const taxPrice = Number(ticketsPrice * 0.132).toFixed(2)
+  const totalPrice = Number(Number(ticketsPrice) + Number(taxPrice)).toFixed(2)
   const seatsThisShow = []
   const findSeats = (time, date) => {
+    console.log('calling findseats')
     theatre.seatAvailability.map((seats) => {
+      console.log('hi')
       if (seats.date === date) {
+        console.log('matching date :', date)
         seats.shows.map((show) => {
           if (show.showTiming === time) {
             seatsThisShow.push(show.seats)
@@ -59,18 +68,18 @@ const TheatrePage = () => {
       }
     })
   }
+  console.log(time)
+  console.log(date)
   if (time && date) {
     findSeats(time, date)
   }
 
-  const ticketsPrice = 130
-  const taxPrice = ticketsPrice * 0.1
-  const totalPrice = ticketsPrice + taxPrice
   const handleSeatSelection = async (s, e) => {
-    setColor(!color)
+    // setColor(!color)
     if (!seats.includes(s.name)) {
       setSeats(seats.concat(s.name))
       setSeatId(seatId.concat(s._id))
+
       e.target.classList.toggle('selected')
     } else {
       const modifiedSeats = seats.filter((seat) => seat !== s.name)
@@ -106,7 +115,9 @@ const TheatrePage = () => {
       navigate('/signin')
     }
     dispatch(getTheatreById(params.id))
-  }, [dispatch, confirmation, clearance])
+    setSeatId([])
+    setSeats([])
+  }, [dispatch, confirmation, clearance, time, date])
   return (
     <>
       <div className='container'>

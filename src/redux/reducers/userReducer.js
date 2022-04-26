@@ -64,7 +64,7 @@ export const passwordResetLinkReducer = (state = {}, action) => {
 export const userUpdateReducer = (state = { updatedUser: {} }, action) => {
   switch (action.type) {
     case userConstants.USER_UPDATE_REQUEST:
-      return { loading: true }
+      return { ...state, loading: true }
     case userConstants.USER_UPDATE_SUCCESS:
       return { loading: false, success: true, updatedUser: action.payload }
     case userConstants.USER_UPDATE_FAIL:
