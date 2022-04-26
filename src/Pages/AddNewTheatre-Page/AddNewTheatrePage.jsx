@@ -11,9 +11,11 @@ import { Button, Card } from 'react-bootstrap'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Moment from 'moment'
 import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Checkbox from '@material-ui/core/Checkbox'
 import { addTheatre } from '../../redux/actions/theatreActions'
 import { theatreConstants } from '../../redux/constants/theatreConstants'
+import './AddNewTheatrePage.styles.css'
 const AddNewTheatrePage = () => {
   const [state, setState] = useState({
     '10.30 A.M': false,
@@ -53,7 +55,7 @@ const AddNewTheatrePage = () => {
       .string()
       .required('Movie Name is required')
       .matches(
-        '^[a-zA-Z ]{2,24}$',
+        '[a-zA-Z][a-zA-Z ]+[a-zA-Z]{2,24}$',
         'Movie Name should be minimum 2 characters and only letters are allowed'
       ),
     cast: yup.string().required('Cast is required'),
@@ -76,8 +78,8 @@ const AddNewTheatrePage = () => {
       .string()
       .required('Rating is required')
       .matches(
-        '^[a-zA-Z ]{2,16}$',
-        'Rating should be minimum 2 characters and only letters are allowed'
+        '^[a-zA-Z ]{1,16}$',
+        'Rating should be minimum 1 character1 and only letters are allowed'
       ),
     runtime: yup.string().required('Runtime is required'),
     runningDays: yup
@@ -158,9 +160,11 @@ const AddNewTheatrePage = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='container theatre-form-container'>
+      <h2>ADD NEW THEATRE </h2>
       <ToastContainer />
-      <form onSubmit={handleSubmit} className='form-container '>
+
+      <form onSubmit={handleSubmit} className='theatre-form'>
         <TextField
           InputProps={textFieldStyles}
           InputLabelProps={textFieldStyles}
@@ -172,6 +176,7 @@ const AddNewTheatrePage = () => {
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.theatreName && touched.theatreName}
+          className='txt-box'
         />
         <span className='text-field'>
           {errors.theatreName && touched.theatreName ? errors.theatreName : ''}
@@ -328,18 +333,21 @@ const AddNewTheatrePage = () => {
           {errors.runningDays && touched.runningDays ? errors.runningDays : ''}
         </span>
 
-        <label for='releaseDate'>Release Date : </label>
+        <label for='releaseDate' className='label-txt'>
+          Release Date :{' '}
+        </label>
         <input
           type='date'
           id='releaseDate'
           name='releaseDate'
           value={values.releaseDate}
-          // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
           min={Moment(new Date()).format('YYYY-MM-DD')}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <label for='lastDate'>Last Date : </label>
+        <label for='lastDate' className='label-txt'>
+          Last Date :{' '}
+        </label>
         <input
           type='date'
           id='lastDate'
@@ -351,6 +359,9 @@ const AddNewTheatrePage = () => {
           onBlur={handleBlur}
         />
         <div className='shows'>
+          <label for='' className='label-txt'>
+            Shows :{' '}
+          </label>
           <FormControlLabel
             control={
               <Checkbox
@@ -412,7 +423,9 @@ const AddNewTheatrePage = () => {
             label='7.30 A.M'
           />
         </div>
-        <Button type='submit'>Update</Button>
+        <Button type='submit' className='add-theatre-btn' variant='info'>
+          Add Theatre
+        </Button>
       </form>
     </div>
   )

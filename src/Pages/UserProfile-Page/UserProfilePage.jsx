@@ -84,7 +84,7 @@ const UserProfilePage = () => {
     }
   }
   return (
-    <div className='container grid grid--2--cols'>
+    <div className='container grid profile-container'>
       {loading && <Loader />}
       <div className='profile-box'>
         <Card className='movie-card'>
@@ -177,7 +177,10 @@ const UserProfilePage = () => {
                 : ''}
             </span>
 
-            <Button type='submit' onClick={() => handleUpdate()}>
+            <Button
+              type='submit'
+              variant='success'
+              onClick={() => handleUpdate()}>
               Update
             </Button>
           </form>

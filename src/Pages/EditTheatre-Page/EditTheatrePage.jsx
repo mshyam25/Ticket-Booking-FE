@@ -15,8 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import { theatreConstants } from '../../redux/constants/theatreConstants'
-import { string } from 'yup/lib/locale'
+
 const EditTheatrePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -173,10 +172,11 @@ function UpdateMovie({ theatre, id }) {
     }
   }, [success, error])
   return (
-    <div className='container '>
+    <div className='container theatre-form-container'>
+      <h2>EDIT THEATRE </h2>
       <ToastContainer />
       {loading && <Loader />}
-      <form onSubmit={handleSubmit} className='form-container '>
+      <form onSubmit={handleSubmit} className='theatre-form'>
         <TextField
           InputProps={textFieldStyles}
           InputLabelProps={textFieldStyles}
@@ -431,7 +431,9 @@ function UpdateMovie({ theatre, id }) {
           />
         </div>
 
-        <Button type='submit'>Update</Button>
+        <Button type='submit' variant='warning'>
+          Update
+        </Button>
       </form>
     </div>
   )

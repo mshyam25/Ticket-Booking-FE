@@ -22,6 +22,8 @@ code {
 .container {
   margin: 9.6rem auto;
   max-width: 140rem;
+  padding: 2rem;
+  border: solid 2px black;
 }
 
 .grid {

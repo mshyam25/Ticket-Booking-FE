@@ -13,6 +13,10 @@
   cursor: pointer;
 }
 
+.show-time:hover {
+  background-color: #74b816;
+}
+
 .span-class-2 {
   font-size: 1.8rem;
   font-weight: 500;

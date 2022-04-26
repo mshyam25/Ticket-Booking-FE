@@ -137,7 +137,7 @@ const TheatrePage = () => {
                       </span>
                     </div>
                   </ListGroupItem>
-                  <ListGroupItem>
+                  <ListGroupItem className='margin-bottom-sm'>
                     <div className='date-picker flex-box'>
                       <span className='span-class-2'>Choose a Date :</span>
 
@@ -153,12 +153,12 @@ const TheatrePage = () => {
                       />
                     </div>
                   </ListGroupItem>
-                  <ListGroupItem>
-                    <div className='shows-box flex-box'>
+                  <ListGroupItem className='margin-bottom-sm'>
+                    <div className='shows-box flex-box '>
                       {theatre.showTimings.map((show, index) => (
                         <Badge
                           key={index}
-                          variant='primary'
+                          variant='success'
                           className='show-time'
                           onClick={() => setTime(show)}>
                           {show}
@@ -168,10 +168,12 @@ const TheatrePage = () => {
                   </ListGroupItem>
                   {seatsThisShow.length > 0 && (
                     <>
-                      <ListGroupItem className='seat-sec'>
-                        <Row className='d-flex justify-content-center text-center'>
+                      <ListGroupItem className='seat-sec margin-bottom-sm'>
+                        <Row className='d-flex justify-content-center text-center '>
                           <Col>
-                            <h3>Pick Your Seats</h3>
+                            <h3>
+                              You are seeing Seat Availability for {time} show
+                            </h3>
                             <ListGroupItem>
                               <div className='seat-classification flex-box'>
                                 <div className='seat-category flex-box'>
