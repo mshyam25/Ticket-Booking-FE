@@ -36,8 +36,8 @@ const Header = () => {
               <>
                 {' '}
                 <li>
-                  <a className='main-nav-link' href='/'>
-                    PROFILE
+                  <a className='main-nav-link' href='/profile'>
+                    MY PROFILE
                   </a>
                 </li>
               </>
@@ -78,12 +78,17 @@ const Header = () => {
 
             <li>
               {userInfo ? (
-                <a
-                  className='main-nav-link nav-cta'
-                  href='/signin'
-                  onClick={userLogout}>
-                  LOGOUT
-                </a>
+                <>
+                  <a className='main-nav-link' href=''>
+                    {userInfo.name}
+                  </a>
+                  <a
+                    className='main-nav-link nav-cta'
+                    href='/signin'
+                    onClick={userLogout}>
+                    LOGOUT
+                  </a>
+                </>
               ) : (
                 <a className='main-nav-link nav-cta' href='/signin'>
                   SIGN IN

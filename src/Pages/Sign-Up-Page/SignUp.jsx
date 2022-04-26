@@ -66,8 +66,6 @@ const SignUp = () => {
       },
     })
 
-  const defaultValues = () => {}
-
   useEffect(() => {
     if (userInfo) {
       dispatch({ type: userConstants.USER_LOGIN_RESET })

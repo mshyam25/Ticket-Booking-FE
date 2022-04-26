@@ -12,6 +12,8 @@ import PaymentGatewayPage from './Pages/PaymentGateway-Page/PaymentGateway-Page'
 import UsersListPage from './Pages/UsersListPage/UsersListPage'
 import UserBookingsPage from './Pages/UserBookings-Page/UserBookingsPage'
 import TheatreBookingsPage from './Pages/TheatreBookings-Page/TheatreBookingsPage'
+import UserProfilePage from './Pages/UserProfile-Page/UserProfilePage'
+import EditTheatrePage from './Pages/EditTheatre-Page/EditTheatrePage'
 function App() {
   return (
     <main>
@@ -19,9 +21,11 @@ function App() {
       <Routes>
         <Route path='/' element={<h1>Landing Page</h1>} />
         <Route path='/paymentgateway' element={<PaymentGatewayPage />} />
+        <Route path='/edittheatre/:id' element={<EditTheatrePage />} />
         <Route path='/theatres' element={<TheatresPage />} />
         <Route path='/theatres/:id' element={<TheatrePage />} />
         <Route path='/users' element={<UsersListPage />} />
+        <Route path='/profile' element={<UserProfilePage />} />
         <Route path='/userbookings/:id' element={<UserBookingsPage />} />
         <Route path='/theatrebookings/:id' element={<TheatreBookingsPage />} />
         <Route path='/signin' element={<SignIn />} />
