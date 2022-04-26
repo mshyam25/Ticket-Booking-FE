@@ -25,22 +25,24 @@ const UsersListPage = () => {
   return (
     <>
       <div className='container'>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>
-                <strong>USER ID</strong>
-              </th>
+        <h3>USERS</h3>
+        {loading && <Loader />}
+        {users && (
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>
+                  <strong>USER ID</strong>
+                </th>
 
-              <th>Username</th>
-              <th>Email</th>
-              <th>Is Admin ?</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users &&
-              users.map((user, index) => {
+                <th>Username</th>
+                <th>Email</th>
+                <th>Is Admin ?</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user, index) => {
                 return (
                   <tr>
                     <td>{index + 1}</td>
@@ -51,8 +53,9 @@ const UsersListPage = () => {
                   </tr>
                 )
               })}
-          </tbody>
-        </Table>
+            </tbody>
+          </Table>
+        )}
         {/* <div className='grid grid--3--cols'>
           
         </div> */}

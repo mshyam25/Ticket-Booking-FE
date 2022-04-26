@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
-import Message from '../../Components/Message/Message'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
 import { bookingsOfTheatre } from '../../redux/actions/bookingActions'
 import { Table } from 'react-bootstrap'
-
+import './TheatreBookingsPage.styles.css'
 const UsersListPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -68,7 +67,7 @@ const UsersListPage = () => {
             </Table>
           </>
         ) : (
-          <h2>No Bookings Made for this Theatre.</h2>
+          <h1 className='bookings-txt'>No Bookings Made for this Theatre.</h1>
         )}
       </div>
     </>

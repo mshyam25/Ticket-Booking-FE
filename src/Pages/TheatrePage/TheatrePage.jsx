@@ -8,7 +8,7 @@ import {
   Button,
 } from 'react-bootstrap'
 import Loader from '../../Components/Loader/Loader'
-
+import IconButton from '@mui/material/IconButton'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Badge } from 'react-bootstrap'
@@ -24,11 +24,10 @@ import Message from '../../Components/Message/Message'
 const TheatrePage = () => {
   const [time, setTime] = useState(null)
   const [date, setDate] = useState(new Date().toISOString().slice(0, 10))
-  const [color, setColor] = useState(false)
   const [seats, setSeats] = useState([])
   const [seatId, setSeatId] = useState([])
-  // const [ticketsPrice, setTicketsPrice] = useState(0)
-
+  const [clicked, setClicked] = useState(false)
+  console.log(time)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
@@ -41,7 +40,6 @@ const TheatrePage = () => {
 
   const confirmSeat = useSelector((state) => state.confirmSeat)
   const { loading: loadingConfirmSeat, confirmation, error } = confirmSeat
-
   const clearReservedSeats = useSelector((state) => state.clearReservedSeats)
   const {
     loading: loadingClearance,
@@ -55,11 +53,8 @@ const TheatrePage = () => {
   const totalPrice = Number(Number(ticketsPrice) + Number(taxPrice)).toFixed(2)
   const seatsThisShow = []
   const findSeats = (time, date) => {
-    console.log('calling findseats')
     theatre.seatAvailability.map((seats) => {
-      console.log('hi')
       if (seats.date === date) {
-        console.log('matching date :', date)
         seats.shows.map((show) => {
           if (show.showTiming === time) {
             seatsThisShow.push(show.seats)
@@ -68,14 +63,12 @@ const TheatrePage = () => {
       }
     })
   }
-  console.log(time)
-  console.log(date)
+
   if (time && date) {
     findSeats(time, date)
   }
 
   const handleSeatSelection = async (s, e) => {
-    // setColor(!color)
     if (!seats.includes(s.name)) {
       setSeats(seats.concat(s.name))
       setSeatId(seatId.concat(s._id))
@@ -225,7 +218,7 @@ const TheatrePage = () => {
                                       index === 1 || index === 7
                                         ? 'margin-right-sm'
                                         : ''
-                                    } naming-class`}>
+                                    } naming-class margin-bottom-xs`}>
                                     {index + 1}
                                   </span>
                                 )
@@ -237,7 +230,7 @@ const TheatrePage = () => {
                               return (
                                 <>
                                   <div className='box'>
-                                    <span className='naming-class'>{`${String.fromCharCode(
+                                    <span className='naming-class margin-bottom-xs'>{`${String.fromCharCode(
                                       64 + index + 1
                                     )}`}</span>
                                     {seatRow.map((s, index) => {
@@ -247,25 +240,37 @@ const TheatrePage = () => {
                                             index === 1 || index === 7
                                               ? 'margin-right-sm'
                                               : ''
-                                          } naming-class margin-bottom-xs`}
-                                          onClick={(e) =>
-                                            handleSeatSelection(s, e)
-                                          }>
+                                          } naming-class margin-bottom-xs`}>
                                           {s.isBooked ? (
-                                            <FontAwesomeIcon
-                                              className='booked-icon icn'
-                                              icon={faCouch}
-                                            />
+                                            <IconButton
+                                              aria-label='seat'
+                                              disabled>
+                                              <FontAwesomeIcon
+                                                className='booked-icon icn'
+                                                icon={faCouch}
+                                              />
+                                            </IconButton>
                                           ) : s.isReserved ? (
-                                            <FontAwesomeIcon
-                                              className='reserved-icon icn'
-                                              icon={faCouch}
-                                            />
+                                            <IconButton
+                                              aria-label='seat'
+                                              disabled>
+                                              <FontAwesomeIcon
+                                                className='reserved-icon icn'
+                                                icon={faCouch}
+                                              />
+                                            </IconButton>
                                           ) : (
-                                            <FontAwesomeIcon
-                                              className='available-icon icn'
-                                              icon={faCouch}
-                                            />
+                                            <IconButton
+                                              aria-label='seat'
+                                              className='icon'
+                                              onClick={(e) =>
+                                                handleSeatSelection(s, e)
+                                              }>
+                                              <FontAwesomeIcon
+                                                className='available-icon icn'
+                                                icon={faCouch}
+                                              />
+                                            </IconButton>
                                           )}
                                         </span>
                                       )
