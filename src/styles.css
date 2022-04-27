@@ -1,0 +1,167 @@
+/* THEATRES PAGE */
+
+.theatres-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.2rem;
+  align-items: center;
+  justify-items: center;
+}
+.movie-card {
+  gap: 1.6rem;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2.4rem 4.8rem rgba(32, 27, 27, 0.1);
+}
+
+.movie-poster {
+  width: 100%;
+}
+
+.movie-details {
+  padding: 3.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.movie-name {
+  font-size: 3.2rem;
+  font-weight: 500;
+}
+
+.theatre-name {
+  font-size: 3.2rem;
+  font-weight: 400;
+}
+
+.span-class {
+  font-size: 1.6rem;
+  font-weight: 500;
+  margin-right: 1.2rem;
+}
+
+.span-class.cast {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+/* Common for Theatres , Theatre */
+.shows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.6rem;
+}
+.show-time {
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 10px;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.6rem;
+}
+
+/* INDIVIDUAL THEATRE SEAT BOOKING STYLES */
+
+.seat-selection-card {
+  border-radius: 12px;
+  box-shadow: 0 2.4rem 4.8rem rgba(32, 27, 27, 0.1);
+  overflow: hidden;
+}
+
+.seat-section-header {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  align-items: center;
+}
+
+.date-picker {
+  height: 9.6rem;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.show-time:hover {
+  background-color: #74b816;
+}
+
+.seat-classification {
+  font-size: 2rem;
+  font-weight: 500;
+  justify-content: center;
+}
+
+.display-icon {
+  font-size: 1.6rem !important;
+  border-radius: 50%;
+  box-shadow: 0 1.6rem 3.2rem rgba(255, 255, 255, 0.3);
+}
+.available-icon {
+  color: #222;
+}
+.booked-icon {
+  color: #d9480f;
+}
+.reserved-icon {
+  color: #74c0fc;
+}
+
+.booking-container {
+  padding: 3.2rem;
+}
+
+.seat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.shadow-class {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2.4rem 4.8rem rgba(32, 27, 27, 0.1);
+}
+
+.seats-box {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.naming-class {
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seat-icon {
+  font-size: 1.6rem !important;
+  border-radius: 50%;
+  box-shadow: 0 1.6rem 3.2rem rgba(255, 255, 255, 0.3);
+}
+
+.seat-icon:hover {
+  transform: scale(1.6);
+}
+
+.seat-selected {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem 1rem;
+}
+
+.selected {
+  color: #74b816;
+}

@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 html {
-  font-size: 10px;
+  font-size: 62.5%;
 }
 body {
   font-family: 'Rubik', sans-serif;
@@ -53,9 +53,13 @@ code {
   margin-right: 3rem;
 }
 
+.margin-right-xs {
+  margin-right: 1.6rem;
+}
+
 .btn {
   padding: 2rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   width: 100%;
 }

@@ -1,0 +1,6 @@
+@media (max-width: 84em) {
+  .container {
+    max-width: 120rem;
+    background-color: aqua;
+  }
+}
