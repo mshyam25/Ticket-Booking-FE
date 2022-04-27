@@ -1,13 +1,17 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import Loader from '../../Components/Loader/Loader'
+
 import Message from '../../Components/Message/Message'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@mui/material/TextField'
-import { Button } from 'react-bootstrap'
-import './ForgotPasswordPage.styles.css'
+import { Button, Card } from 'react-bootstrap'
+
+//Toaster,Loader,CSS
+import Loader from '../../Components/Loader/Loader'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 import { findUser, resetPasswordLink } from '../../redux/actions/userActions'
 const ForgotPasswordPage = () => {
   const dispatch = useDispatch()
@@ -22,7 +26,7 @@ const ForgotPasswordPage = () => {
     success: successLink,
   } = passwordResetLink
 
-  const textFieldStyles = { style: { fontSize: 18 } }
+  const textFieldStyles = { style: { fontSize: '2rem' } }
   const formValidation = yup.object({
     email: yup
       .string()
@@ -40,52 +44,82 @@ const ForgotPasswordPage = () => {
   const sendVerificationLink = () => {
     dispatch(resetPasswordLink(values.email))
   }
+  const errorToast = (msg) =>
+    toast.error(msg, {
+      position: 'top-center',
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  const successToast = (msg) =>
+    toast.success(msg, {
+      position: 'top-right',
+      autoClose: 6000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  useEffect(() => {
+    if (error) errorToast(error)
+    if (errorLink) errorToast(errorLink)
+    if (successLink) {
+      successToast('Email Sent')
+    }
+  }, [error, errorLink, successLink])
   return (
-    <div className='container align-center-box'>
-      {loading && <Loader />}
-      {error && <Message variant='danger'>{error}</Message>}
-      {loadingLink && <Loader />}
-      {errorLink && <Message variant='danger'>{errorLink}</Message>}
-      {successLink && <Message variant='info'>{successLink}</Message>}
+    <div className='container flex-box-center'>
+      <ToastContainer />
+      {loading || (loadingLink && <Loader />)}
+
+      {successLink && <span className='secondary-header'>{successLink}</span>}
       {!success && (
         <>
-          <h2>Enter Your Email Id</h2>
+          <Card className='form-section'>
+            <span className='secondary-header'>Enter Your Email Id</span>
 
-          <form onSubmit={handleSubmit} className='form-container'>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='email'
-              name='email'
-              value={values.email}
-              label='Email'
-              variant='filled'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.email && touched.email}
-            />
-            <span className='text-field'>
-              {errors.email && touched.email ? errors.email : ''}
-            </span>
-            <Button type='submit' className='btn-med' variant='warning'>
-              Find Account
-            </Button>
-          </form>
+            <form onSubmit={handleSubmit} className='form-container'>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='email'
+                name='email'
+                value={values.email}
+                label='Email'
+                variant='filled'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email && touched.email}
+              />
+              <span className='text-field'>
+                {errors.email && touched.email ? errors.email : ''}
+              </span>
+              <div className='btn-container'>
+                <Button type='submit' className='cta-btn-md' variant='warning'>
+                  Find Account
+                </Button>{' '}
+              </div>
+            </form>
+          </Card>
         </>
       )}
       {success && !successLink && (
-        <>
-          <h3>Your Account is Verified.</h3>
-          <h3>
+        <Card className='form-section'>
+          <span className='secondary-header'>
+            <h3>Your Account is Verified.</h3>
             Please click below to send a new password reset link to your email.
-          </h3>
+          </span>
           <Button
-            className='verify-btn'
+            className='cta-btn-md'
             variant='info'
             onClick={() => sendVerificationLink()}>
             Reset Password
           </Button>
-        </>
+        </Card>
       )}
     </div>
   )

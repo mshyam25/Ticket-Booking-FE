@@ -84,108 +84,117 @@ const UserProfilePage = () => {
     }
   }
   return (
-    <div className='container grid profile-container'>
+    <div className='container flex-box-center'>
       {loading && <Loader />}
-      <div className='profile-box'>
-        <Card className='movie-card'>
-          <Card.Body>
-            <Card.Title className='movie-name'>
-              {userInfo.name} : {userInfo.email}
-            </Card.Title>
 
+      <Card className='form-section'>
+        <Card.Body>
+          <Card.Title className='movie-name margin-bottom-sm'>
+            {userInfo.name} : {userInfo.email}
+          </Card.Title>
+          <div className='btn-container'>
             <Button
               variant='warning'
+              className='cta-btn'
               onClick={() => navigate(`/userbookings/${userInfo._id}`)}>
               {' '}
               View Bookings
             </Button>
             {!edit ? (
-              <Button variant='info' onClick={() => setEdit(!edit)}>
+              <Button
+                variant='info'
+                className='cta-btn'
+                onClick={() => setEdit(!edit)}>
                 {' '}
                 Edit Profile
               </Button>
             ) : (
               ''
             )}
-          </Card.Body>
-        </Card>
-      </div>
-      {edit && (
-        <>
-          <form onSubmit={handleSubmit} className='form-container'>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='name'
-              name='name'
-              value={values.name}
-              label='Name'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.name && touched.name}
-            />
-            <span className='text-field'>
-              {errors.name && touched.name ? errors.name : ''}
-            </span>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='email'
-              name='email'
-              value={values.email}
-              label='Email'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.email && touched.email}
-            />
-            <span className='text-field'>
-              {errors.email && touched.email ? errors.email : ''}
-            </span>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='password'
-              name='password'
-              type='password'
-              value={values.password}
-              label='Password'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.password && touched.password}
-            />
-            <span className='text-field'>
-              {errors.password && touched.password ? errors.password : ''}
-            </span>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='confirmpassword'
-              name='confirmpassword'
-              value={values.confirmpassword}
-              label='Confirm Password'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.confirmpassword && touched.confirmpassword}
-            />
-            <span className='text-field'>
-              {errors.confirmpassword && touched.confirmpassword
-                ? errors.confirmpassword
-                : ''}
-            </span>
+          </div>
+        </Card.Body>
+        {edit && (
+          <>
+            <form onSubmit={handleSubmit} className='form-container'>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='name'
+                name='name'
+                value={values.name}
+                label='Name'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.name && touched.name}
+              />
+              <span className='text-field'>
+                {errors.name && touched.name ? errors.name : ''}
+              </span>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='email'
+                name='email'
+                value={values.email}
+                label='Email'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email && touched.email}
+              />
+              <span className='text-field'>
+                {errors.email && touched.email ? errors.email : ''}
+              </span>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='password'
+                name='password'
+                type='password'
+                value={values.password}
+                label='Password'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password && touched.password}
+              />
+              <span className='text-field'>
+                {errors.password && touched.password ? errors.password : ''}
+              </span>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='confirmpassword'
+                name='confirmpassword'
+                value={values.confirmpassword}
+                label='Confirm Password'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.confirmpassword && touched.confirmpassword}
+              />
+              <span className='text-field'>
+                {errors.confirmpassword && touched.confirmpassword
+                  ? errors.confirmpassword
+                  : ''}
+              </span>
 
-            <Button
-              type='submit'
-              variant='success'
-              onClick={() => handleUpdate()}>
-              Update
-            </Button>
-          </form>
-        </>
-      )}
+              <Button
+                type='submit'
+                variant='success'
+                onClick={() => handleUpdate()}>
+                Update
+              </Button>
+
+              <Button variant='info' onClick={() => setEdit(!edit)}>
+                {' '}
+                Cancel Edit
+              </Button>
+            </form>
+          </>
+        )}
+      </Card>
     </div>
   )
 }

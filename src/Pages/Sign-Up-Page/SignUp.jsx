@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 //Styling Imports
 import TextField from '@mui/material/TextField'
-import { Button } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 
 //Action Imports
 import { registerUser } from '../../redux/actions/userActions'
@@ -32,7 +32,7 @@ const SignUp = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const textFieldStyles = { style: { fontSize: 18 } }
+  const textFieldStyles = { style: { fontSize: '2rem', width: '100%' } }
 
   const userSignIn = useSelector((state) => state.userSignIn)
   const {
@@ -98,78 +98,85 @@ const SignUp = () => {
   return (
     <>
       <ToastContainer />
-      {loading && <Loader />}
 
-      <div className='container form-section'>
-        <span className='signin-header'>SIGN UP PAGE</span>
+      <div className='container flex-box-center'>
+        {loading || (loadingUserInfo && <Loader />)}
+        <Card className='form-section'>
+          <span className='secondary-header'>Sign Up</span>
 
-        <form onSubmit={handleSubmit} className='form-container'>
-          <TextField
-            InputProps={textFieldStyles}
-            InputLabelProps={textFieldStyles}
-            id='name'
-            name='name'
-            value={values.name}
-            label='Name'
-            variant='outlined'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.name && touched.name}
-          />
-          <span className='text-field'>
-            {errors.name && touched.name ? errors.name : ''}
-          </span>
-          <TextField
-            InputProps={textFieldStyles}
-            InputLabelProps={textFieldStyles}
-            id='email'
-            name='email'
-            value={values.email}
-            label='Email'
-            variant='outlined'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.email && touched.email}
-          />
-          <span className='text-field'>
-            {errors.email && touched.email ? errors.email : ''}
-          </span>
-          <TextField
-            InputProps={textFieldStyles}
-            InputLabelProps={textFieldStyles}
-            id='password'
-            name='password'
-            type='password'
-            value={values.password}
-            label='Password'
-            variant='outlined'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.password && touched.password}
-          />
-          <span className='text-field'>
-            {errors.password && touched.password ? errors.password : ''}
-          </span>
-          <TextField
-            InputProps={textFieldStyles}
-            InputLabelProps={textFieldStyles}
-            id='confirmpassword'
-            name='confirmpassword'
-            value={values.confirmpassword}
-            label='Confirm Password'
-            variant='outlined'
-            onChange={handleChange}
-            onBlur={handleBlur}
-            error={errors.confirmpassword && touched.confirmpassword}
-          />
-          <span className='text-field'>
-            {errors.confirmpassword && touched.confirmpassword
-              ? errors.confirmpassword
-              : ''}
-          </span>
-
-          <Button type='submit'>Sign in</Button>
-        </form>
+          <form onSubmit={handleSubmit} className='form-container'>
+            <TextField
+              InputProps={textFieldStyles}
+              InputLabelProps={textFieldStyles}
+              id='name'
+              name='name'
+              value={values.name}
+              label='Name'
+              variant='standard'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.name && touched.name}
+            />
+            <span className='text-field'>
+              {errors.name && touched.name ? errors.name : ''}
+            </span>
+            <TextField
+              InputProps={textFieldStyles}
+              InputLabelProps={textFieldStyles}
+              id='email'
+              name='email'
+              value={values.email}
+              label='Email'
+              variant='standard'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.email && touched.email}
+            />
+            <span className='text-field'>
+              {errors.email && touched.email ? errors.email : ''}
+            </span>
+            <TextField
+              InputProps={textFieldStyles}
+              InputLabelProps={textFieldStyles}
+              id='password'
+              name='password'
+              type='password'
+              value={values.password}
+              label='Password'
+              variant='standard'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.password && touched.password}
+            />
+            <span className='text-field'>
+              {errors.password && touched.password ? errors.password : ''}
+            </span>
+            <TextField
+              InputProps={textFieldStyles}
+              InputLabelProps={textFieldStyles}
+              id='confirmpassword'
+              name='confirmpassword'
+              value={values.confirmpassword}
+              label='Confirm Password'
+              variant='standard'
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.confirmpassword && touched.confirmpassword}
+            />
+            <span className='text-field'>
+              {errors.confirmpassword && touched.confirmpassword
+                ? errors.confirmpassword
+                : ''}
+            </span>
+            <Button type='submit' variant='info'>
+              Sign Up
+            </Button>{' '}
+            {/* <span className='text-field'>
+              Sign Up with your email and start booking your favourite movie
+              tickets.
+            </span> */}
+          </form>
+        </Card>
       </div>
     </>
   )

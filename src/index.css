@@ -70,6 +70,13 @@ code {
   align-items: center;
 }
 
+.flex-box-center {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
 .align-center-box {
   display: flex;
   flex-direction: column;
@@ -77,4 +84,13 @@ code {
   justify-content: center;
   width: 70%;
   gap: 3rem;
+}
+
+/* Headers */
+
+.secondary-header {
+  margin-top: 3.2rem;
+  font-size: 2.4rem;
+  font-weight: 400;
+  text-align: center;
 }
