@@ -153,7 +153,12 @@ const AddNewTheatrePage = () => {
       navigate('/signin')
     }
     if (errorTheatre) errorToast({ errorTheatre })
-    if (successNewTheatre) successToast('Theatre added')
+    if (successNewTheatre) {
+      successToast('Theatre added')
+      setTimeout(() => {
+        navigate('/theatres')
+      }, 3000)
+    }
   }, [dispatch, userInfo])
   const handleCheckChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked })
@@ -163,7 +168,7 @@ const AddNewTheatrePage = () => {
     <div className='container theatre-form-container'>
       <h2>ADD NEW THEATRE </h2>
       <ToastContainer />
-
+      {loadingTheatre && <Loader />}
       <form onSubmit={handleSubmit} className='theatre-form'>
         <TextField
           InputProps={textFieldStyles}
@@ -332,32 +337,35 @@ const AddNewTheatrePage = () => {
         <span className='text-field'>
           {errors.runningDays && touched.runningDays ? errors.runningDays : ''}
         </span>
-
-        <label for='releaseDate' className='label-txt'>
-          Release Date :{' '}
-        </label>
-        <input
-          type='date'
-          id='releaseDate'
-          name='releaseDate'
-          value={values.releaseDate}
-          min={Moment(new Date()).format('YYYY-MM-DD')}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        <label for='lastDate' className='label-txt'>
-          Last Date :{' '}
-        </label>
-        <input
-          type='date'
-          id='lastDate'
-          name='lastDate'
-          value={values.lastDate}
-          // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
-          min={Moment(new Date()).format('YYYY-MM-DD')}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
+        <div className='date-picker flex-box'>
+          <label for='releaseDate' className='label-txt'>
+            Release Date :{' '}
+          </label>
+          <input
+            type='date'
+            id='releaseDate'
+            name='releaseDate'
+            value={values.releaseDate}
+            min={Moment(new Date()).format('YYYY-MM-DD')}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
+        <div className='date-picker flex-box'>
+          <label for='lastDate' className='label-txt'>
+            Last Date :{' '}
+          </label>
+          <input
+            type='date'
+            id='lastDate'
+            name='lastDate'
+            value={values.lastDate}
+            // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
+            min={Moment(new Date()).format('YYYY-MM-DD')}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
         <div className='shows'>
           <label for='' className='label-txt'>
             Shows :{' '}
@@ -423,9 +431,11 @@ const AddNewTheatrePage = () => {
             label='7.30 A.M'
           />
         </div>
-        <Button type='submit' className='add-theatre-btn' variant='info'>
-          Add Theatre
-        </Button>
+        <div className='btn-container'>
+          <Button type='submit' className='cta-btn' variant='info'>
+            Add Theatre
+          </Button>
+        </div>
       </form>
     </div>
   )

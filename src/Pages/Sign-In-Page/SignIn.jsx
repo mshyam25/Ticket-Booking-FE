@@ -15,7 +15,6 @@ import { userLogIn } from '../../redux/actions/userActions'
 import Loader from '../../Components/Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import './Signin.styles.css'
 
 const SignIn = () => {
   const errorToast = (msg) =>

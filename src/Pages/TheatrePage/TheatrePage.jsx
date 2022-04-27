@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCouch } from '@fortawesome/free-solid-svg-icons'
 import Moment from 'moment'
 import { getTheatreById } from '../../redux/actions/theatreActions'
-import './TheatrePage.styles.css'
+
 import { confirmMySeats } from '../../redux/actions/seatActions'
 import { bookingConstants } from '../../redux/constants/bookingConstants'
 import Message from '../../Components/Message/Message'

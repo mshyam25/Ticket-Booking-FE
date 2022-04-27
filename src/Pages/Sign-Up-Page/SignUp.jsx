@@ -16,7 +16,6 @@ import { userConstants } from '../../redux/constants/userConstants'
 import Loader from '../../Components/Loader/Loader'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import './SignUp.styles.css'
 
 const SignUp = () => {
   const errorToast = (msg) =>

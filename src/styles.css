@@ -66,6 +66,27 @@
   gap: 1.6rem;
 }
 
+/* ADD THEATRE */
+
+.theatre-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.theatre-form {
+  display: grid;
+  grid-template-columns: 2 1fr;
+  width: 50%;
+  gap: 2rem;
+}
+
+.label-txt {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
 /* INDIVIDUAL THEATRE SEAT BOOKING STYLES */
 
 .seat-selection-card {
@@ -205,6 +226,7 @@
 }
 
 /* BUTTON Styles */
+
 .btn-container {
   display: flex;
   justify-content: center;

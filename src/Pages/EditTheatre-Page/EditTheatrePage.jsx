@@ -344,30 +344,33 @@ function UpdateMovie({ theatre, id }) {
         <span className='text-field'>
           {errors.theatreArea && touched.theatreArea ? errors.theatreArea : ''}
         </span>
+        <div className='date-picker flex-box'>
+          <label for='releaseDate'>Release Date : </label>
+          <input
+            type='date'
+            id='releaseDate'
+            name='releaseDate'
+            value={values.releaseDate}
+            // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
+            min={Moment(new Date()).format('YYYY-MM-DD')}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
 
-        <label for='releaseDate'>Release Date : </label>
-        <input
-          type='date'
-          id='releaseDate'
-          name='releaseDate'
-          value={values.releaseDate}
-          // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
-          min={Moment(new Date()).format('YYYY-MM-DD')}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        <label for='lastDate'>Last Date : </label>
-        <input
-          type='date'
-          id='lastDate'
-          name='lastDate'
-          value={values.lastDate}
-          // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
-          min={Moment(new Date()).format('YYYY-MM-DD')}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-
+        <div className='date-picker flex-box'>
+          <label for='lastDate'>Last Date : </label>
+          <input
+            type='date'
+            id='lastDate'
+            name='lastDate'
+            value={values.lastDate}
+            // min={Moment(theatre.releaseDate).format('YYYY-MM-DD')}
+            min={Moment(new Date()).format('YYYY-MM-DD')}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </div>
         <div className='shows'>
           <FormControlLabel
             control={
@@ -430,10 +433,11 @@ function UpdateMovie({ theatre, id }) {
             label='7.30 A.M'
           />
         </div>
-
-        <Button type='submit' variant='warning'>
-          Update
-        </Button>
+        <div className='btn-container'>
+          <Button type='submit' variant='warning' className='cta-btn'>
+            Update
+          </Button>
+        </div>
       </form>
     </div>
   )
