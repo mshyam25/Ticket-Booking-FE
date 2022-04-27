@@ -98,64 +98,67 @@ const SignIn = () => {
     <>
       <ToastContainer />
       <div className='container flex-box-center'>
-        {loading && <Loader />}
-        <Card className='form-section'>
-          <span className='secondary-header'>Sign in</span>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Card className='form-section'>
+            <span className='secondary-header'>Sign in</span>
 
-          <form onSubmit={handleSubmit} className='form-container'>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='email'
-              name='email'
-              value={values.email}
-              label='Email'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.email && touched.email}
-            />
-            <span className='text-field'>
-              {errors.email && touched.email ? errors.email : ''}
-            </span>
-            <TextField
-              InputProps={textFieldStyles}
-              InputLabelProps={textFieldStyles}
-              id='password'
-              name='password'
-              type='password'
-              value={values.password}
-              label='Password'
-              variant='outlined'
-              onChange={handleChange}
-              onBlur={handleBlur}
-              error={errors.password && touched.password}
-            />
-            <span className='text-field'>
-              {errors.password && touched.password ? errors.password : ''}
-            </span>
-            <Link to='/forgotpassword' className='links'>
-              Forgot password ?
-            </Link>
-            <div className='btn-container'>
-              <Button type='submit' variant='info' className='cta-btn'>
-                Sign in
-              </Button>{' '}
-            </div>
-
-            <span className='text-field'>
-              If you have recently registered, please confirm your email and try
-              sign in.
-            </span>
-
-            <span className='text-field'>
-              New Customer ?{' '}
-              <Link to='/signup' className='links'>
-                Sign Up
+            <form onSubmit={handleSubmit} className='form-container'>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='email'
+                name='email'
+                value={values.email}
+                label='Email'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.email && touched.email}
+              />
+              <span className='text-field'>
+                {errors.email && touched.email ? errors.email : ''}
+              </span>
+              <TextField
+                InputProps={textFieldStyles}
+                InputLabelProps={textFieldStyles}
+                id='password'
+                name='password'
+                type='password'
+                value={values.password}
+                label='Password'
+                variant='outlined'
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={errors.password && touched.password}
+              />
+              <span className='text-field'>
+                {errors.password && touched.password ? errors.password : ''}
+              </span>
+              <Link to='/forgotpassword' className='links'>
+                Forgot password ?
               </Link>
-            </span>
-          </form>
-        </Card>
+              <div className='btn-container'>
+                <Button type='submit' variant='info' className='cta-btn'>
+                  Sign in
+                </Button>{' '}
+              </div>
+
+              <span className='text-field'>
+                If you have recently registered, please confirm your email and
+                try sign in.
+              </span>
+
+              <span className='text-field'>
+                New Customer ?{' '}
+                <Link to='/signup' className='links'>
+                  Sign Up
+                </Link>
+              </span>
+            </form>
+          </Card>
+        )}
       </div>
     </>
   )

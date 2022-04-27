@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-weight: 400;
   line-height: 1.5;
+  background-color: #dbe4ff;
 }
 
 code {
@@ -23,7 +24,6 @@ code {
   margin: 9.6rem auto;
   max-width: 140rem;
   padding: 2rem;
-  border: solid 2px black;
 }
 
 .grid {

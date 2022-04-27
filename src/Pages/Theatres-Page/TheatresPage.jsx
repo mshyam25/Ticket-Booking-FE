@@ -72,14 +72,7 @@ const TheatresPage = () => {
                         </Badge>
                       ))}
                     </div>
-                    {!userInfo.isAdmin ? (
-                      <Button
-                        variant='success'
-                        className='btn'
-                        onClick={() => handleClick(theatre._id)}>
-                        Book Tickets
-                      </Button>
-                    ) : (
+                    {userInfo && userInfo.isAdmin ? (
                       <div className='buttons'>
                         <Button
                           variant='danger'
@@ -104,6 +97,13 @@ const TheatresPage = () => {
                           Edit Theatre
                         </Button>
                       </div>
+                    ) : (
+                      <Button
+                        variant='success'
+                        className='btn'
+                        onClick={() => handleClick(theatre._id)}>
+                        Book Tickets
+                      </Button>
                     )}
                   </div>
                 </Card>

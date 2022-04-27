@@ -28,6 +28,11 @@ const Header = () => {
                 />
               </a>
             </li>
+            <li>
+              <a className='main-nav-link' href='/theatres'>
+                BOOK TICKETS
+              </a>
+            </li>
           </ul>
         </nav>
         <nav className='main-nav'>
@@ -45,11 +50,6 @@ const Header = () => {
             {userInfo && !userInfo.isAdmin && (
               <>
                 {' '}
-                <li>
-                  <a className='main-nav-link' href='/theatres'>
-                    BOOK TICKETS
-                  </a>
-                </li>
                 <li>
                   <a
                     className='main-nav-link'

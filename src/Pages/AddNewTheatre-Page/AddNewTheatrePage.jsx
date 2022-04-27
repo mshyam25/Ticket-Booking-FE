@@ -15,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Checkbox from '@material-ui/core/Checkbox'
 import { addTheatre } from '../../redux/actions/theatreActions'
 import { theatreConstants } from '../../redux/constants/theatreConstants'
-import './AddNewTheatrePage.styles.css'
+
 const AddNewTheatrePage = () => {
   const [state, setState] = useState({
     '10.30 A.M': false,
