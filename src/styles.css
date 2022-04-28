@@ -402,8 +402,7 @@
   border-top: solid 1px #aaa;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  bottom: 1rem;
+  margin-bottom: 0;
 }
 .footer-text {
   font-size: 1.6rem;
