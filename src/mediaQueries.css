@@ -7,14 +7,14 @@
   .margin-right-sm {
     margin-right: 1rem;
   }
+  html {
+    font-size: 56.25%;
+  }
 }
 
 /* BELOW 1200px (Landscape tablets) */
 
 @media (max-width: 75em) {
-  html {
-    font-size: 56.25%;
-  }
   .secondary-header {
     font-size: 2.4rem;
   }
@@ -85,5 +85,53 @@
     gap: 3.2rem;
     align-items: center;
     justify-items: center;
+  }
+}
+
+/* BELOW 400px (Phones) */
+
+@media (max-width: 25rem) {
+  html {
+    font-size: 25%;
+  }
+  /* Home Page */
+
+  .primary-text {
+    font-size: 3rem;
+  }
+  .secondary-text {
+    font-size: 2.4rem;
+  }
+
+  /* Header */
+
+  .logo {
+    margin-left: 1rem;
+  }
+
+  .header {
+    padding: 0;
+  }
+  .main-nav-list {
+    gap: 1 rem;
+  }
+
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 1.3rem;
+  }
+  .main-nav-link.nav-cta:link,
+  .main-nav-link.nav-cta:visited {
+    padding: 1rem;
+  }
+
+  /* Theatres */
+
+  .btn,
+  .show-time {
+    font-size: 1.6rem;
+    padding: 2rem;
+    border-radius: 9px;
+    line-height: 1.6;
   }
 }

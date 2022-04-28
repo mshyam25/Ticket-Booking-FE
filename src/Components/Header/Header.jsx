@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../redux/actions/userActions'
 
-import './Header.styles.css'
-
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -15,7 +13,7 @@ const Header = () => {
     navigate('/signin')
   }
   return (
-    <header className='header nav-open'>
+    <header className='header'>
       <a className='main-nav-link' href='/'>
         <img className='logo' alt='Movies-Logo' src='posters/logo.jpeg' />
       </a>
