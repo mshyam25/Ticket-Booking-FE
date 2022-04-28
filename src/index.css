@@ -23,8 +23,6 @@ code {
   margin: 9.6rem auto;
   max-width: 140rem;
   padding: 0 3.2rem;
-  border: solid 1px black;
-  overflow: scroll;
 }
 
 .grid {

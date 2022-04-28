@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../redux/actions/userActions'
@@ -9,7 +9,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const userSignIn = useSelector((state) => state.userSignIn)
-  const { loading, error, userInfo } = userSignIn
+  const { userInfo } = userSignIn
   const userLogout = () => {
     dispatch(logout())
     navigate('/signin')
