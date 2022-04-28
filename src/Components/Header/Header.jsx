@@ -17,7 +17,7 @@ const Header = () => {
   return (
     <header className='header nav-open'>
       <a className='main-nav-link' href='/'>
-        <img className='logo' alt='Movies-Logo' src='posters/movies-logo.png' />
+        <img className='logo' alt='Movies-Logo' src='posters/logo.jpeg' />
       </a>
       <nav className='main-nav'>
         <ul className='main-nav-list'>
@@ -45,6 +45,11 @@ const Header = () => {
               <li>
                 <a className='main-nav-link' href='/users'>
                   Users
+                </a>
+              </li>
+              <li>
+                <a className='main-nav-link' href='/addtheatre'>
+                  Add Theatre
                 </a>
               </li>
             </>

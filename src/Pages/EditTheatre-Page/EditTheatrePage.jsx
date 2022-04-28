@@ -65,13 +65,7 @@ function UpdateMovie({ theatre, id }) {
         '[a-zA-Z][a-zA-Z ]+[a-zA-Z]{2,16}$',
         'Theatre Name should be minimum 2 characters and only letters are allowed'
       ),
-    movieName: yup
-      .string()
-      .required('Movie Name is required')
-      .matches(
-        '[a-zA-Z][a-zA-Z ]+[a-zA-Z]{2,24}$',
-        'Movie Name should be minimum 2 characters and only letters are allowed'
-      ),
+    movieName: yup.string().required('Movie Name is required'),
     cast: yup.string().required('Cast is required'),
     director: yup
       .string()

@@ -27,14 +27,6 @@ const TheatresPage = () => {
   }, [])
   return (
     <div className='container'>
-      {userInfo && userInfo.isAdmin && (
-        <Button
-          variant='primary'
-          className='cta-btn '
-          onClick={() => navigate('/addtheatre')}>
-          Add New Theatre
-        </Button>
-      )}
       {theatresLoading && <Loader />}
 
       {theatres ? (

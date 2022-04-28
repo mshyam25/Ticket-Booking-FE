@@ -15,12 +15,13 @@ import TheatreBookingsPage from './Pages/TheatreBookings-Page/TheatreBookingsPag
 import UserProfilePage from './Pages/UserProfile-Page/UserProfilePage'
 import EditTheatrePage from './Pages/EditTheatre-Page/EditTheatrePage'
 import AddNewTheatrePage from './Pages/AddNewTheatre-Page/AddNewTheatrePage'
+import HomePage from './Pages/Home-Page/HomePage'
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route path='/' element={<h1>Landing Page</h1>} />
+        <Route path='/' element={<HomePage />} />
         <Route path='/paymentgateway' element={<PaymentGatewayPage />} />
         <Route path='/addtheatre' element={<AddNewTheatrePage />} />
         <Route path='/edittheatre/:id' element={<EditTheatrePage />} />

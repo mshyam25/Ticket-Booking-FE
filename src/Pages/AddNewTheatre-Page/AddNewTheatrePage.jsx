@@ -37,11 +37,7 @@ const AddNewTheatrePage = () => {
   const { userInfo } = userSignIn
 
   const newTheatre = useSelector((state) => state.newTheatre)
-  const {
-    loading: loadingTheatre,
-    error: errorTheatre,
-    success: successNewTheatre,
-  } = newTheatre
+  const { loading: loadingTheatre, error: errorTheatre, success } = newTheatre
 
   const formValidation = yup.object({
     theatreName: yup
@@ -51,13 +47,7 @@ const AddNewTheatrePage = () => {
         '^[a-zA-Z ]{2,16}$',
         'Theatre Name should be minimum 2 characters and only letters are allowed'
       ),
-    movieName: yup
-      .string()
-      .required('Movie Name is required')
-      .matches(
-        '[a-zA-Z][a-zA-Z ]+[a-zA-Z]{2,24}$',
-        'Movie Name should be minimum 2 characters and only letters are allowed'
-      ),
+    movieName: yup.string().required('Movie Name is required'),
     cast: yup.string().required('Cast is required'),
     director: yup
       .string()
@@ -152,8 +142,8 @@ const AddNewTheatrePage = () => {
     if (!userInfo || !userInfo.isAdmin) {
       navigate('/signin')
     }
-    if (errorTheatre) errorToast({ errorTheatre })
-    if (successNewTheatre) {
+    if (errorTheatre) errorToast(errorTheatre)
+    if (success) {
       successToast('Theatre added')
       setTimeout(() => {
         navigate('/theatres')
