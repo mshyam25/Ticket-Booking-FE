@@ -1,6 +1,57 @@
+/* BELOW 1344px (Smaller desktops) */
+
 @media (max-width: 84em) {
   .container {
     max-width: 120rem;
-    background-color: aqua;
+  }
+  .margin-right-sm {
+    margin-right: 1rem;
+  }
+}
+
+/* BELOW 1200px (Landscape tablets) */
+
+@media (max-width: 75em) {
+  html {
+    font-size: 56.25%;
+  }
+  .secondary-header {
+    font-size: 2.4rem;
+  }
+
+  .main-nav-list {
+    gap: 3.2rem;
+  }
+  /* .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 1.6rem;
+  } */
+
+  .btn {
+    padding: 1rem;
+    font-size: 1.4rem;
+  }
+}
+
+/* BELOW 960px (Landscape tablets) */
+
+@media (max-width: 60em) {
+  .container {
+    max-width: 100rem;
+  }
+  html {
+    font-size: 50%;
+  }
+
+  .shows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .show-time {
+    padding: 1rem;
+  }
+  .booking-container {
+    display: grid;
+    grid-template-columns: 1fr;
   }
 }

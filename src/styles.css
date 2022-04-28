@@ -1,3 +1,57 @@
+/* HEADER STYLES */
+.logo {
+  height: 4.4rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fdf2e9;
+  /* Because we want it to be sticky */
+  height: 9.6rem;
+  padding: 0 4.8rem;
+}
+
+/* ******************* */
+/* Navigation */
+/* ******************* */
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  gap: 4.2rem;
+  align-items: center;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+  display: inline-block;
+
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+.main-nav-link.nav-cta:link,
+.main-nav-link.nav-cta:visited {
+  display: inline-block;
+  color: #fff;
+  border-radius: 9px;
+  padding: 1.2rem 2.4rem;
+  background-color: #e67e32;
+}
+
+.main-nav-link.nav-cta:hover,
+.main-nav-link.nav-cta:active {
+  background-color: #cf711f;
+}
+
+.main-nav-link:hover,
+.main-nav-link:active {
+  color: #cf711f;
+}
+
 /* THEATRES PAGE */
 
 .theatres-section {
@@ -26,7 +80,7 @@
 }
 
 .movie-name {
-  font-size: 3.2rem;
+  font-size: 3rem;
   font-weight: 500;
 }
 
@@ -93,6 +147,7 @@
   border-radius: 12px;
   box-shadow: 0 2.4rem 4.8rem rgba(32, 27, 27, 0.1);
   overflow: hidden;
+  padding: 3.2rem;
 }
 
 .seat-section-header {
@@ -155,7 +210,7 @@
 .seats-box {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .naming-class {

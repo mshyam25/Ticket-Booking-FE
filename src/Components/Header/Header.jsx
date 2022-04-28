@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../redux/actions/userActions'
-
+import BookOnlineIcon from '@mui/icons-material/BookOnline'
 import './Header.styles.css'
 
 const Header = () => {
@@ -23,14 +23,14 @@ const Header = () => {
               <a className='main-nav-link' href='/'>
                 <img
                   className='logo'
-                  alt='Omnifood-logo'
-                  src='img/omnifood-logo.png'
+                  alt='Movies-Logo'
+                  src='posters/movies-logo.png'
                 />
               </a>
             </li>
             <li>
               <a className='main-nav-link' href='/theatres'>
-                BOOK TICKETS
+                Book tickets
               </a>
             </li>
           </ul>
@@ -42,7 +42,7 @@ const Header = () => {
                 {' '}
                 <li>
                   <a className='main-nav-link' href='/profile'>
-                    MY PROFILE
+                    My Profile
                   </a>
                 </li>
               </>
@@ -54,7 +54,7 @@ const Header = () => {
                   <a
                     className='main-nav-link'
                     href={`/userbookings/${userInfo._id}`}>
-                    MY BOOKINGS
+                    My Bookings
                   </a>
                 </li>
               </>
@@ -64,36 +64,38 @@ const Header = () => {
               <>
                 <li>
                   <a className='main-nav-link' href='/users'>
-                    USERS
+                    Users
                   </a>
                 </li>
 
                 <li>
                   <a className='main-nav-link' href='/theatres'>
-                    THEATRES
+                    Theatres
                   </a>
                 </li>
                 <li>
                   <a className='main-nav-link' href='/addtheatre'>
-                    ADD THEATRE
+                    Add Theatre
                   </a>
                 </li>
               </>
             )}
 
             <li>
+              {userInfo && (
+                <a className='main-nav-link' href=''>
+                  {userInfo.name}
+                </a>
+              )}
+            </li>
+            <li>
               {userInfo ? (
-                <>
-                  <a className='main-nav-link' href=''>
-                    {userInfo.name}
-                  </a>
-                  <a
-                    className='main-nav-link nav-cta'
-                    href='/signin'
-                    onClick={userLogout}>
-                    LOGOUT
-                  </a>
-                </>
+                <a
+                  className='main-nav-link nav-cta'
+                  href='/signin'
+                  onClick={userLogout}>
+                  LOGOUT
+                </a>
               ) : (
                 <a className='main-nav-link nav-cta' href='/signin'>
                   SIGN IN
