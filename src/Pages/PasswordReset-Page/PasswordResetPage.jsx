@@ -21,16 +21,20 @@ const PasswordResetPage = () => {
   const { loading, error, success, updatedUser } = userUpdate
   const textFieldStyles = { style: { fontSize: 18 } }
   const formValidation = yup.object({
-    password: yup.string().required('Password is required'),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
-    confirmpassword: yup.string().required('Password is required'),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
+    password: yup
+      .string()
+      .required('Password is required')
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
+    confirmpassword: yup
+      .string()
+      .required('Password is required')
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
   })
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
     useFormik({

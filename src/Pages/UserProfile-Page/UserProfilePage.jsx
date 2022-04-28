@@ -39,16 +39,18 @@ const UserProfilePage = () => {
       .string()
       .required('Email is required')
       .matches('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$', 'Invalid Email Address'),
-    password: yup.string(),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
-    confirmpassword: yup.string(),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
+    password: yup
+      .string()
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
+    confirmpassword: yup
+      .string()
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
   })
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =

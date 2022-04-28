@@ -55,16 +55,20 @@ const SignUp = () => {
       .string()
       .required('Email is required')
       .matches('^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$', 'Invalid Email Address'),
-    password: yup.string().required('Password is required'),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
-    confirmpassword: yup.string().required('Password is required'),
-    // .matches(
-    //   '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
-    //   'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
-    // ),
+    password: yup
+      .string()
+      .required('Password is required')
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
+    confirmpassword: yup
+      .string()
+      .required('Password is required')
+      .matches(
+        '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{5,}$',
+        'Password should be minimum 5 characters, at least one uppercase letter, one lowercase letter, one number and one special character'
+      ),
   })
 
   const { values, errors, handleBlur, handleChange, handleSubmit, touched } =
