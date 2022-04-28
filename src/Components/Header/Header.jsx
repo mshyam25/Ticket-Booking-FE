@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout } from '../../redux/actions/userActions'
-
+import BookOnlineIcon from '@mui/icons-material/BookOnline'
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className='header'>
       <a className='main-nav-link' href='/'>
-        <img className='logo' alt='Movies-Logo' src='posters/logo.jpeg' />
+        <BookOnlineIcon className='logo' />{' '}
       </a>
       <nav className='main-nav'>
         <ul className='main-nav-list'>

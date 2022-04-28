@@ -42,7 +42,7 @@
 }
 /* HEADER STYLES */
 .logo {
-  height: 4.4rem;
+  font-size: 5rem !important;
 }
 
 .header {
