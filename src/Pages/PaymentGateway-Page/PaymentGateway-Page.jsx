@@ -88,6 +88,15 @@ const PaymentGatewayPage = () => {
         <>
           {' '}
           <span className='secondary-header'>PaymentsPage</span>
+          <span className='secondary-header'>
+            ID :{' '}
+            <span className='secondary-header'>
+              sb-zkzqv14256732@personal.example.com
+            </span>{' '}
+          </span>
+          <span className='secondary-header'>
+            PW : <span className='secondary-header'>sjT0J^:B</span>
+          </span>
           <Card>
             <PayPalButton
               amount={bookingDetails.totalPrice}

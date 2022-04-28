@@ -54,6 +54,10 @@
   .main-nav-list {
     gap: 2.8rem;
   }
+  .main-nav-link:link,
+  .main-nav-link:visited {
+    font-size: 2rem;
+  }
 }
 
 /* BELOW 768px (Landscape tablets) */
@@ -66,6 +70,10 @@
   html {
     font-size: 43.75%;
   }
+
+  .main-nav-list {
+    gap: 1.4rem;
+  }
 }
 
 /* BELOW 576px (Small tablets) */
@@ -77,6 +85,14 @@
 
   html {
     font-size: 36.75%;
+  }
+
+  .header {
+    padding: 0;
+  }
+
+  .main-nav-list {
+    gap: 1rem;
   }
 
   /* Theatres */
@@ -117,16 +133,9 @@
     margin-left: 1rem;
   }
 
-  .header {
-    padding: 0;
-  }
-  .main-nav-list {
-    gap: 1 rem;
-  }
-
   .main-nav-link:link,
   .main-nav-link:visited {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
   }
   .main-nav-link.nav-cta:link,
   .main-nav-link.nav-cta:visited {

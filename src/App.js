@@ -16,6 +16,7 @@ import UserProfilePage from './Pages/UserProfile-Page/UserProfilePage'
 import EditTheatrePage from './Pages/EditTheatre-Page/EditTheatrePage'
 import AddNewTheatrePage from './Pages/AddNewTheatre-Page/AddNewTheatrePage'
 import HomePage from './Pages/Home-Page/HomePage'
+import Footer from './Components/Footer/Footer'
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
           element={<Verificationemail />}
         />
       </Routes>
+      <Footer />
     </>
   )
 }

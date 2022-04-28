@@ -22,6 +22,11 @@ export const userLogIn = (email, password) => async (dispatch, getState) => {
     dispatch({ type: userConstants.USER_LOGIN_SUCCESS, payload: data })
     // Setting user details into local storage
     localStorage.setItem('currentUser', JSON.stringify(data))
+
+    setTimeout(() => {
+      console.log('session destroyed')
+      localStorage.removeItem('currentUser')
+    }, 480000)
   } catch (error) {
     dispatch({
       type: userConstants.USER_LOGIN_FAIL,
