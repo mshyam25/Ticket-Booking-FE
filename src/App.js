@@ -17,7 +17,7 @@ import EditTheatrePage from './Pages/EditTheatre-Page/EditTheatrePage'
 import AddNewTheatrePage from './Pages/AddNewTheatre-Page/AddNewTheatrePage'
 function App() {
   return (
-    <main>
+    <>
       <Header />
       <Routes>
         <Route path='/' element={<h1>Landing Page</h1>} />
@@ -39,7 +39,7 @@ function App() {
           element={<Verificationemail />}
         />
       </Routes>
-    </main>
+    </>
   )
 }
 

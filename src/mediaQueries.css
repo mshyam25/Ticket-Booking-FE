@@ -22,10 +22,6 @@
   .main-nav-list {
     gap: 3.2rem;
   }
-  /* .main-nav-link:link,
-  .main-nav-link:visited {
-    font-size: 1.6rem;
-  } */
 
   .btn {
     padding: 1rem;
@@ -53,5 +49,41 @@
   .booking-container {
     display: grid;
     grid-template-columns: 1fr;
+  }
+
+  .main-nav-list {
+    gap: 2.8rem;
+  }
+}
+
+/* BELOW 768px (Landscape tablets) */
+
+@media (max-width: 48em) {
+  .container {
+    max-width: 80rem;
+  }
+
+  html {
+    font-size: 43.75%;
+  }
+}
+
+/* BELOW 576px (Landscape tablets) */
+
+@media (max-width: 36em) {
+  .container {
+    max-width: 80rem;
+  }
+
+  html {
+    font-size: 35.75%;
+  }
+
+  .theatres-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3.2rem;
+    align-items: center;
+    justify-items: center;
   }
 }

@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fdf2e9;
+  /* background-color: #fdf2e9; */
   /* Because we want it to be sticky */
   height: 9.6rem;
   padding: 0 4.8rem;
@@ -16,6 +16,7 @@
 /* ******************* */
 /* Navigation */
 /* ******************* */
+
 .main-nav-list {
   list-style: none;
   display: flex;
@@ -50,6 +51,24 @@
 .main-nav-link:hover,
 .main-nav-link:active {
   color: #cf711f;
+}
+
+/* MOBILE */
+
+.btn-mobile-nav {
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: none;
+}
+
+.icon-mobile-nav {
+  height: 4.8rem !important;
+  width: 4.8rem !important;
+}
+
+.icon-mobile-nav[name='close'] {
+  display: none;
 }
 
 /* THEATRES PAGE */
