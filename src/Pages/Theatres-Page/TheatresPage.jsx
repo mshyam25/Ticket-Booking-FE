@@ -11,7 +11,7 @@ const TheatresPage = () => {
   const theatresList = useSelector((state) => state.theatresList)
   const {
     loading: theatresLoading,
-    error: theatresError,
+
     theatres,
   } = theatresList
 
@@ -24,14 +24,12 @@ const TheatresPage = () => {
   }
   useEffect(() => {
     dispatch(getAllTheatres())
-  }, [])
+  }, [dispatch])
   return (
     <div className='container'>
       {theatresLoading && <Loader />}
-
       {theatres ? (
         <>
-          {/* <h1>Select Your seats</h1> */}
           <section className='theatres-section'>
             {theatres.map((theatre, index) => {
               return (

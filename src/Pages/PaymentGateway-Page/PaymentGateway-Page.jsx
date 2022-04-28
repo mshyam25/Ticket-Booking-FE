@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { PayPalButton } from 'react-paypal-button-v2'
 import axios from 'axios'
 import { API } from '../../utils'
+import { Card } from 'react-bootstrap'
 import Loader from '../../Components/Loader/Loader'
 import Message from '../../Components/Message/Message'
 import { bookSeats } from '../../redux/actions/seatActions'
@@ -35,8 +35,21 @@ const PaymentGatewayPage = () => {
     success: successNewBooking,
     error: errorNewBooking,
   } = newBooking
+  let booking = {}
+
+  if (bookingDetails) {
+    booking = {
+      theatreId: bookingDetails.theatreId,
+      date: bookingDetails.date,
+      time: bookingDetails.showTime,
+      seatId: bookingDetails.seatId,
+    }
+  }
 
   useEffect(() => {
+    if (!bookingDetails || !userInfo) {
+      navigate('/theatres')
+    }
     const addPayPalScript = async () => {
       const { data: clientId } = await axios.get(`${API}/paypalclient`)
       const script = document.createElement('script')
@@ -49,59 +62,45 @@ const PaymentGatewayPage = () => {
       }
       document.body.appendChild(script)
     }
-    if (!bookingDetails) {
-      navigate('/')
-    }
+
     if (!window.paypal) {
       addPayPalScript()
     } else {
       setSdkReady(true)
     }
-  }, [userInfo, bookingDetails, dispatch])
+  }, [userInfo, bookingDetails, dispatch, navigate])
 
-  console.log(bookingDetails)
-  const booking = {
-    theatreId: bookingDetails.theatreId,
-    date: bookingDetails.date,
-    time: bookingDetails.showTime,
-    seatId: bookingDetails.seatId,
-  }
-  console.log(booking)
   const paymentHandler = (paymentResult) => {
     dispatch(newMovieBooking(bookingDetails))
 
     dispatch(bookSeats(booking))
     setPaymentStatus(paymentResult)
-
-    console.log(paymentResult)
   }
   return (
-    <div>
-      <div className='container align-center-box'>
-        {errorBookingSeats && (
-          <Message variant='danger'>{errorBookingSeats}</Message>
-        )}
-        {errorNewBooking && (
-          <Message variant='danger'>{errorNewBooking}</Message>
-        )}
-        {!sdkReady || loadingBookingSeats || loadingNewBooking ? (
-          <Loader />
-        ) : !paymentStatus ? (
-          <>
-            {' '}
-            <h1>PaymentsPage</h1>
+    <div className='payment-container'>
+      {errorBookingSeats && (
+        <Message variant='danger'>{errorBookingSeats}</Message>
+      )}
+      {errorNewBooking && <Message variant='danger'>{errorNewBooking}</Message>}
+      {!sdkReady || loadingBookingSeats || loadingNewBooking ? (
+        <Loader />
+      ) : !paymentStatus ? (
+        <>
+          {' '}
+          <span className='secondary-header'>PaymentsPage</span>
+          <Card>
             <PayPalButton
               amount={bookingDetails.totalPrice}
               onSuccess={paymentHandler}></PayPalButton>
-          </>
-        ) : paymentStatus && successBookingSeats && successNewBooking ? (
-          <h1>
-            Your payment is successfull.Booking Details are sent to your email.
-          </h1>
-        ) : (
-          ''
-        )}
-      </div>
+          </Card>
+        </>
+      ) : paymentStatus && successBookingSeats && successNewBooking ? (
+        <span className='secondary-text'>
+          Your payment is Completed. Booking Details are sent to your email.
+        </span>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

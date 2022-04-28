@@ -14,8 +14,6 @@ import {
 } from './reducers/seatReducer'
 import {
   passwordResetLinkReducer,
-  passwordResetReducer,
-  securityConfirmReducer,
   userFindReducer,
   userListReducer,
   userRegisterReducer,

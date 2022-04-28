@@ -20,8 +20,8 @@ import 'react-toastify/dist/ReactToastify.css'
 const SignUp = () => {
   const errorToast = (msg) =>
     toast.error(msg, {
-      position: 'top-center',
-      autoClose: 6000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -36,12 +36,12 @@ const SignUp = () => {
   const userSignIn = useSelector((state) => state.userSignIn)
   const {
     loading: loadingUserInfo,
-    error: errorUserInfo,
+
     userInfo: user,
   } = userSignIn
 
   const userRegister = useSelector((state) => state.userRegister)
-  const { loading, success, error: errorRegister, userInfo } = userRegister
+  const { loading, error: errorRegister, userInfo } = userRegister
 
   const formValidation = yup.object({
     name: yup
@@ -93,7 +93,7 @@ const SignUp = () => {
     if (errorRegister) {
       errorToast(errorRegister)
     }
-  }, [user, errorRegister, userInfo])
+  }, [user, errorRegister, userInfo, dispatch, navigate])
   return (
     <>
       <ToastContainer />

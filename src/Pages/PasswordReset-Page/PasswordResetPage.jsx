@@ -1,13 +1,18 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import Loader from '../../Components/Loader/Loader'
+
 import Message from '../../Components/Message/Message'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@mui/material/TextField'
 import { Button } from 'react-bootstrap'
 import { resetPassword } from '../../redux/actions/userActions'
+
+//Toaster,Loader,CSS
+import Loader from '../../Components/Loader/Loader'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const PasswordResetPage = () => {
   const dispatch = useDispatch()
@@ -35,12 +40,24 @@ const PasswordResetPage = () => {
         if (values.password === values.confirmpassword) {
           dispatch(resetPassword(params.email, values.password))
         } else {
-          alert('Passwords do not match')
+          errorToast('Passowords do not match !')
         }
       },
     })
+  const errorToast = (msg) =>
+    toast.error(msg, {
+      position: 'bottom-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+
   return (
     <>
+      <ToastContainer />
       <div className='container'>
         {loading ? (
           <Loader />

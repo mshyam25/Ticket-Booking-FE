@@ -1,25 +1,30 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import Loader from '../../Components/Loader/Loader'
+import { useNavigate } from 'react-router-dom'
 
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@mui/material/TextField'
 import { Button, Card } from 'react-bootstrap'
-import './UserProfilePage.styles.css'
+
 import { getUser, updateUser } from '../../redux/actions/userActions'
+
+//Toaster,Loader,CSS
+import Loader from '../../Components/Loader/Loader'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
 const UserProfilePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const params = useParams()
+
   const [edit, setEdit] = useState(false)
 
   const userSignIn = useSelector((state) => state.userSignIn)
   const { userInfo } = userSignIn
 
   const userUpdate = useSelector((state) => state.userUpdate)
-  const { loading, error, success, updatedUser } = userUpdate
+  const { loading, error, success } = userUpdate
 
   const textFieldStyles = { style: { fontSize: 18 } }
   const formValidation = yup.object({
@@ -55,146 +60,177 @@ const UserProfilePage = () => {
         confirmpassword: '',
       },
       validationSchema: formValidation,
-      onSubmit: () => {},
+      onSubmit: () => {
+        if (values.password !== values.confirmpassword) {
+          alert('Passwords do not match')
+          values.password = ''
+          values.confirmpassword = ''
+        } else {
+          console.log('form submitted')
+          dispatch(
+            updateUser({
+              name: values.name,
+              email: values.email,
+              password: values.password,
+            })
+          )
+          dispatch(getUser(userInfo.email))
+          setEdit(!edit)
+        }
+      },
     })
 
+  const handleCancelEdit = () => {
+    setEdit(!edit)
+  }
+  const errorToast = (msg) =>
+    toast.error(msg, {
+      position: 'bottom-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
+  const successToast = (msg) =>
+    toast.success(msg, {
+      position: 'bottom-right',
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    })
   useEffect(() => {
     if (!userInfo) {
       navigate('/signin')
     } else {
       dispatch(getUser(userInfo.email))
     }
-  }, [userInfo])
-
-  const handleUpdate = () => {
-    if (values.password !== values.confirmpassword) {
-      alert('Passwords do not match')
-      values.password = ''
-      values.confirmpassword = ''
-    } else {
-      dispatch(
-        updateUser({
-          name: values.name,
-          email: values.email,
-          password: values.password,
-        })
-      )
-      dispatch(getUser(userInfo.email))
-      setEdit(!edit)
+    if (error) {
+      errorToast(error)
     }
-  }
+
+    if (success) {
+      successToast('User Updated')
+    }
+  }, [userInfo, error, success, dispatch, navigate])
+  console.log(success)
   return (
     <div className='container flex-box-center'>
-      {loading && <Loader />}
-
-      <Card className='form-section'>
-        <Card.Body>
-          <Card.Title className='movie-name margin-bottom-sm'>
-            {userInfo.name} : {userInfo.email}
-          </Card.Title>
-          <div className='btn-container'>
-            <Button
-              variant='warning'
-              className='cta-btn'
-              onClick={() => navigate(`/userbookings/${userInfo._id}`)}>
-              {' '}
-              View Bookings
-            </Button>
-            {!edit ? (
+      <ToastContainer />
+      {loading ? (
+        <Loader />
+      ) : (
+        <Card className='form-section'>
+          <Card.Body>
+            <Card.Title className='movie-name margin-bottom-sm'>
+              {userInfo.name} : {userInfo.email}
+            </Card.Title>
+            <div className='btn-container'>
               <Button
-                variant='info'
-                className='cta-btn'
-                onClick={() => setEdit(!edit)}>
+                variant='warning'
+                className='btn'
+                onClick={() => navigate(`/userbookings/${userInfo._id}`)}>
                 {' '}
-                Edit Profile
+                View Bookings
               </Button>
-            ) : (
-              ''
-            )}
-          </div>
-        </Card.Body>
-        {edit && (
-          <>
-            <form onSubmit={handleSubmit} className='form-container'>
-              <TextField
-                InputProps={textFieldStyles}
-                InputLabelProps={textFieldStyles}
-                id='name'
-                name='name'
-                value={values.name}
-                label='Name'
-                variant='outlined'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.name && touched.name}
-              />
-              <span className='text-field'>
-                {errors.name && touched.name ? errors.name : ''}
-              </span>
-              <TextField
-                InputProps={textFieldStyles}
-                InputLabelProps={textFieldStyles}
-                id='email'
-                name='email'
-                value={values.email}
-                label='Email'
-                variant='outlined'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.email && touched.email}
-              />
-              <span className='text-field'>
-                {errors.email && touched.email ? errors.email : ''}
-              </span>
-              <TextField
-                InputProps={textFieldStyles}
-                InputLabelProps={textFieldStyles}
-                id='password'
-                name='password'
-                type='password'
-                value={values.password}
-                label='Password'
-                variant='outlined'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.password && touched.password}
-              />
-              <span className='text-field'>
-                {errors.password && touched.password ? errors.password : ''}
-              </span>
-              <TextField
-                InputProps={textFieldStyles}
-                InputLabelProps={textFieldStyles}
-                id='confirmpassword'
-                name='confirmpassword'
-                value={values.confirmpassword}
-                label='Confirm Password'
-                variant='outlined'
-                onChange={handleChange}
-                onBlur={handleBlur}
-                error={errors.confirmpassword && touched.confirmpassword}
-              />
-              <span className='text-field'>
-                {errors.confirmpassword && touched.confirmpassword
-                  ? errors.confirmpassword
-                  : ''}
-              </span>
+              {!edit ? (
+                <Button
+                  variant='info'
+                  className='btn'
+                  onClick={() => setEdit(!edit)}>
+                  {' '}
+                  Edit Profile
+                </Button>
+              ) : (
+                ''
+              )}
+            </div>
+          </Card.Body>
+          {edit && (
+            <>
+              <form onSubmit={handleSubmit} className='form-container'>
+                <TextField
+                  InputProps={textFieldStyles}
+                  InputLabelProps={textFieldStyles}
+                  id='name'
+                  name='name'
+                  value={values.name}
+                  label='Name'
+                  variant='filled'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.name && touched.name}
+                />
+                <span className='text-field'>
+                  {errors.name && touched.name ? errors.name : ''}
+                </span>
+                <TextField
+                  InputProps={textFieldStyles}
+                  InputLabelProps={textFieldStyles}
+                  id='email'
+                  name='email'
+                  value={values.email}
+                  label='Email'
+                  variant='filled'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.email && touched.email}
+                />
+                <span className='text-field'>
+                  {errors.email && touched.email ? errors.email : ''}
+                </span>
+                <TextField
+                  InputProps={textFieldStyles}
+                  InputLabelProps={textFieldStyles}
+                  id='password'
+                  name='password'
+                  type='password'
+                  value={values.password}
+                  label='Password'
+                  variant='filled'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.password && touched.password}
+                />
+                <span className='text-field'>
+                  {errors.password && touched.password ? errors.password : ''}
+                </span>
+                <TextField
+                  InputProps={textFieldStyles}
+                  InputLabelProps={textFieldStyles}
+                  id='confirmpassword'
+                  name='confirmpassword'
+                  type='password'
+                  value={values.confirmpassword}
+                  label='Confirm Password'
+                  variant='filled'
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.confirmpassword && touched.confirmpassword}
+                />
+                <span className='text-field'>
+                  {errors.confirmpassword && touched.confirmpassword
+                    ? errors.confirmpassword
+                    : ''}
+                </span>
 
-              <Button
-                type='submit'
-                variant='success'
-                onClick={() => handleUpdate()}>
-                Update
-              </Button>
+                <Button type='submit' variant='success'>
+                  Update Details
+                </Button>
 
-              <Button variant='info' onClick={() => setEdit(!edit)}>
-                {' '}
-                Cancel Edit
-              </Button>
-            </form>
-          </>
-        )}
-      </Card>
+                <Button variant='info' onClick={() => handleCancelEdit()}>
+                  {' '}
+                  Cancel Edit
+                </Button>
+              </form>
+            </>
+          )}
+        </Card>
+      )}
     </div>
   )
 }

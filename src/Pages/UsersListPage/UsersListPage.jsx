@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Message from '../../Components/Message/Message'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
@@ -14,13 +14,13 @@ const UsersListPage = () => {
   const { userInfo } = userSignIn
 
   const userList = useSelector((state) => state.userList)
-  const { users, loading, error } = userList
+  const { users, loading } = userList
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
       navigate('/signin')
     } else dispatch(getUserList())
-  }, [dispatch])
+  }, [dispatch, userInfo, navigate])
 
   return (
     <>

@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
 import Message from '../../Components/Message/Message'
 import { verificationEmailTrigger } from '../../redux/actions/verificationEmailActions'
-import './Verificationemail.styles.css'
+
 const Verificationemail = () => {
   const params = useParams()
   const dispatch = useDispatch()

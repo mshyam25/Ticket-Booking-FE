@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
 import { bookingsOfTheatre } from '../../redux/actions/bookingActions'
 import { Table } from 'react-bootstrap'
-import './TheatreBookingsPage.styles.css'
+
 const UsersListPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -13,13 +13,13 @@ const UsersListPage = () => {
   const { userInfo } = userSignIn
 
   const theatreBookings = useSelector((state) => state.theatreBookings)
-  const { bookings, loading, error } = theatreBookings
+  const { bookings, loading } = theatreBookings
 
   useEffect(() => {
     if (!userInfo || !userInfo.isAdmin) {
       navigate('/signin')
     } else dispatch(bookingsOfTheatre(params.id))
-  }, [dispatch])
+  }, [dispatch, navigate, userInfo, params.id])
 
   return (
     <>

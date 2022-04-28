@@ -68,7 +68,7 @@
   }
 }
 
-/* BELOW 576px (Landscape tablets) */
+/* BELOW 576px (Small tablets) */
 
 @media (max-width: 36em) {
   .container {
@@ -76,7 +76,15 @@
   }
 
   html {
-    font-size: 35.75%;
+    font-size: 32.75%;
+  }
+
+  /* Theatres */
+
+  .btn,
+  .show-time {
+    font-size: 1.9rem;
+    padding: 2rem;
   }
 
   .theatres-section {
@@ -131,7 +139,11 @@
   .show-time {
     font-size: 1.6rem;
     padding: 2rem;
-    border-radius: 9px;
-    line-height: 1.6;
+  }
+
+  /* ADD THEATRE */
+
+  .shows {
+    gap: 1rem;
   }
 }

@@ -16,7 +16,7 @@ const ForgotPasswordPage = () => {
   const dispatch = useDispatch()
 
   const userFind = useSelector((state) => state.userFind)
-  const { loading, error, success, user } = userFind
+  const { loading, error, success } = userFind
 
   const passwordResetLink = useSelector((state) => state.passwordResetLink)
   const {
@@ -45,8 +45,8 @@ const ForgotPasswordPage = () => {
   }
   const errorToast = (msg) =>
     toast.error(msg, {
-      position: 'top-center',
-      autoClose: 6000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -55,8 +55,8 @@ const ForgotPasswordPage = () => {
     })
   const successToast = (msg) =>
     toast.success(msg, {
-      position: 'top-right',
-      autoClose: 6000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,

@@ -23,10 +23,7 @@ export const verificationEmailTrigger = (email) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: verificationConstants.VERIFICATION_EMAIL_FAIL,
-      // payload:
-      //   error.response && error.response.data.message
-      //     ? error.response.data.message
-      //     : error.message,
+
       payload: error.message,
     })
   }

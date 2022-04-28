@@ -9,7 +9,7 @@ import Loader from '../../Components/Loader/Loader'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@mui/material/TextField'
-import { Button, Card } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import Moment from 'moment'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -33,7 +33,7 @@ const EditTheatrePage = () => {
     } else {
       dispatch(getTheatreById(params.id))
     }
-  }, [dispatch, userInfo])
+  }, [dispatch, userInfo, params.id, navigate])
   return <>{theatre ? <UpdateMovie theatre={theatre} id={params.id} /> : ''}</>
 }
 
@@ -134,8 +134,8 @@ function UpdateMovie({ theatre, id }) {
     })
   const successToast = (msg) =>
     toast.success(msg, {
-      position: 'top-right',
-      autoClose: 6000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -145,8 +145,8 @@ function UpdateMovie({ theatre, id }) {
 
   const errorToast = (msg) =>
     toast.error(msg, {
-      position: 'top-right',
-      autoClose: 6000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -164,7 +164,7 @@ function UpdateMovie({ theatre, id }) {
     if (error) {
       errorToast(error)
     }
-  }, [success, error])
+  }, [success, error, navigate])
   return (
     <div className='container theatre-form-container'>
       <h2>EDIT THEATRE </h2>
@@ -178,7 +178,7 @@ function UpdateMovie({ theatre, id }) {
           name='theatreName'
           value={values.theatreName}
           label='Theatre Name'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.theatreName && touched.theatreName}
@@ -193,7 +193,7 @@ function UpdateMovie({ theatre, id }) {
           name='movieName'
           value={values.movieName}
           label='Movie Name'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.movieName && touched.movieName}
@@ -209,7 +209,7 @@ function UpdateMovie({ theatre, id }) {
           type='cast'
           value={values.cast}
           label='Cast'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.cast && touched.cast}
@@ -224,7 +224,7 @@ function UpdateMovie({ theatre, id }) {
           name='poster'
           value={values.poster}
           label='Poster'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.poster && touched.poster}
@@ -239,7 +239,7 @@ function UpdateMovie({ theatre, id }) {
           name='director'
           value={values.director}
           label='Director'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.director && touched.director}
@@ -254,7 +254,7 @@ function UpdateMovie({ theatre, id }) {
           name='language'
           value={values.language}
           label='Language'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.language && touched.language}
@@ -269,7 +269,7 @@ function UpdateMovie({ theatre, id }) {
           name='runtime'
           value={values.runtime}
           label='Runtime'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.runtime && touched.runtime}
@@ -284,7 +284,7 @@ function UpdateMovie({ theatre, id }) {
           name='rating'
           value={values.rating}
           label='Rating'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.rating && touched.rating}
@@ -299,7 +299,7 @@ function UpdateMovie({ theatre, id }) {
           name='ticketPrice'
           value={values.ticketPrice}
           label='Ticket Price'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.ticketPrice && touched.ticketPrice}
@@ -314,7 +314,7 @@ function UpdateMovie({ theatre, id }) {
           name='runningDays'
           value={values.runningDays}
           label='Running Days'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.runningDays && touched.runningDays}
@@ -330,7 +330,7 @@ function UpdateMovie({ theatre, id }) {
           name='theatreArea'
           value={values.theatreArea}
           label='Theatre Area'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.theatreArea && touched.theatreArea}
@@ -366,6 +366,9 @@ function UpdateMovie({ theatre, id }) {
           />
         </div>
         <div className='shows'>
+          <label for='' className='label-txt'>
+            Shows :{' '}
+          </label>
           <FormControlLabel
             control={
               <Checkbox
@@ -428,7 +431,7 @@ function UpdateMovie({ theatre, id }) {
           />
         </div>
         <div className='btn-container'>
-          <Button type='submit' variant='warning' className='cta-btn'>
+          <Button type='submit' variant='warning' className='btn'>
             Update
           </Button>
         </div>

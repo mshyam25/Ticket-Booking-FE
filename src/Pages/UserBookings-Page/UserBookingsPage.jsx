@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Message from '../../Components/Message/Message'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import Loader from '../../Components/Loader/Loader'
@@ -15,13 +15,13 @@ const UserBookingsPage = () => {
   const { userInfo } = userSignIn
 
   const userBookings = useSelector((state) => state.userBookings)
-  const { myBookings, loading, error } = userBookings
+  const { myBookings, loading } = userBookings
   console.log(myBookings)
   useEffect(() => {
     if (!userInfo) {
       navigate('/signin')
     } else dispatch(bookingsOfUser(params.id))
-  }, [dispatch])
+  }, [dispatch, params.id, userInfo, navigate])
   return (
     <>
       <div className='container'>

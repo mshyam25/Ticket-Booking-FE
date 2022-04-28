@@ -19,8 +19,8 @@ import 'react-toastify/dist/ReactToastify.css'
 const SignIn = () => {
   const errorToast = (msg) =>
     toast.error(msg, {
-      position: 'top-center',
-      autoClose: 5000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -29,8 +29,8 @@ const SignIn = () => {
     })
   const successToast = (msg) =>
     toast.success(msg, {
-      position: 'top-center',
-      autoClose: 5000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -93,11 +93,11 @@ const SignIn = () => {
         'Account created. Verification Mail is sent.Please Verify your account.'
       )
     if (error) errorToast('Invalid Credentials')
-  }, [userInfo])
+  }, [userInfo, navigate, registered, success, error])
   return (
     <>
-      <ToastContainer />
       <div className='container flex-box-center'>
+        <ToastContainer />
         {loading ? (
           <Loader />
         ) : (

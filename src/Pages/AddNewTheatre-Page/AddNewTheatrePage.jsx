@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import { getTheatreById } from '../../redux/actions/theatreActions'
+import { useNavigate } from 'react-router-dom'
+
 import Loader from '../../Components/Loader/Loader'
 import { useFormik } from 'formik'
 import * as yup from 'yup'
 import TextField from '@mui/material/TextField'
-import { Button, Card } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Moment from 'moment'
@@ -31,7 +31,7 @@ const AddNewTheatrePage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const textFieldStyles = { style: { fontSize: 18 } }
+  const textFieldStyles = { style: { fontSize: 14 } }
 
   const userSignIn = useSelector((state) => state.userSignIn)
   const { userInfo } = userSignIn
@@ -118,8 +118,8 @@ const AddNewTheatrePage = () => {
 
   const successToast = (msg) =>
     toast.success(msg, {
-      position: 'top-right',
-      autoClose: 8000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -129,8 +129,8 @@ const AddNewTheatrePage = () => {
 
   const errorToast = (msg) =>
     toast.error(msg, {
-      position: 'top-right',
-      autoClose: 8000,
+      position: 'bottom-right',
+      autoClose: 4000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -149,7 +149,7 @@ const AddNewTheatrePage = () => {
         navigate('/theatres')
       }, 3000)
     }
-  }, [dispatch, userInfo])
+  }, [dispatch, userInfo, navigate, success, errorTheatre])
   const handleCheckChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked })
   }
@@ -167,7 +167,7 @@ const AddNewTheatrePage = () => {
           name='theatreName'
           value={values.theatreName}
           label='Theatre Name'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.theatreName && touched.theatreName}
@@ -183,7 +183,7 @@ const AddNewTheatrePage = () => {
           name='movieName'
           value={values.movieName}
           label='Movie Name'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.movieName && touched.movieName}
@@ -199,7 +199,7 @@ const AddNewTheatrePage = () => {
           type='cast'
           value={values.cast}
           label='Cast'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.cast && touched.cast}
@@ -214,7 +214,7 @@ const AddNewTheatrePage = () => {
           name='poster'
           value={values.poster}
           label='Poster'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.poster && touched.poster}
@@ -229,7 +229,7 @@ const AddNewTheatrePage = () => {
           name='director'
           value={values.director}
           label='Director'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.director && touched.director}
@@ -244,7 +244,7 @@ const AddNewTheatrePage = () => {
           name='language'
           value={values.language}
           label='Language'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.language && touched.language}
@@ -259,7 +259,7 @@ const AddNewTheatrePage = () => {
           name='runtime'
           value={values.runtime}
           label='Runtime'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.runtime && touched.runtime}
@@ -274,7 +274,7 @@ const AddNewTheatrePage = () => {
           name='rating'
           value={values.rating}
           label='Rating'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.rating && touched.rating}
@@ -289,7 +289,7 @@ const AddNewTheatrePage = () => {
           name='ticketPrice'
           value={values.ticketPrice}
           label='Ticket Price'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.ticketPrice && touched.ticketPrice}
@@ -304,7 +304,7 @@ const AddNewTheatrePage = () => {
           name='theatreArea'
           value={values.theatreArea}
           label='Area'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.theatreArea && touched.theatreArea}
@@ -319,7 +319,7 @@ const AddNewTheatrePage = () => {
           name='runningDays'
           value={values.runningDays}
           label='Running Days'
-          variant='outlined'
+          variant='standard'
           onChange={handleChange}
           onBlur={handleBlur}
           error={errors.runningDays && touched.runningDays}
@@ -370,6 +370,7 @@ const AddNewTheatrePage = () => {
             }
             label='10.30 A.M'
           />
+
           <FormControlLabel
             control={
               <Checkbox
@@ -422,7 +423,7 @@ const AddNewTheatrePage = () => {
           />
         </div>
         <div className='btn-container'>
-          <Button type='submit' className='cta-btn' variant='info'>
+          <Button type='submit' className='btn' variant='info'>
             Add Theatre
           </Button>
         </div>

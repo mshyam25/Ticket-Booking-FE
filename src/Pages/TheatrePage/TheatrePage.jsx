@@ -20,7 +20,7 @@ const TheatrePage = () => {
   const [seats, setSeats] = useState([])
   const [seatId, setSeatId] = useState([])
   const [errorMsg, setErrorMsg] = useState(true)
-  const [clicked, setClicked] = useState(false)
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const params = useParams()
@@ -134,6 +134,9 @@ const TheatrePage = () => {
     errorMsg,
     errorClearance,
     errorTheatre,
+    userInfo,
+    params.id,
+    navigate,
   ])
   return (
     <>
