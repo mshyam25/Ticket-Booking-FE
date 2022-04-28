@@ -398,11 +398,12 @@
 /* FOOTER SECTION */
 
 .footer-section {
-  margin-top: 4.8rem;
   display: flex;
   border-top: solid 1px #aaa;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  bottom: 1rem;
 }
 .footer-text {
   font-size: 1.6rem;
