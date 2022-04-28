@@ -41,7 +41,6 @@ function App() {
           element={<Verificationemail />}
         />
       </Routes>
-      <Footer />
     </>
   )
 }
