@@ -1,6 +1,6 @@
-export const API = 'http://localhost:9000'
+//export const API = 'http://localhost:9000'
 
-//export const API = 'https://ticket-booking-appli.herokuapp.com'
+export const API = 'https://ticket-booking-appli.herokuapp.com'
 
 export const validation = (name, email, password) => {
   const emailPattern =
