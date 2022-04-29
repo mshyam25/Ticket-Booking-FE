@@ -25,6 +25,7 @@
 
 .home-img {
   width: 100%;
+  object-fit: cover;
 }
 
 .gallery {
@@ -402,7 +403,7 @@
   border-top: solid 1px #aaa;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0;
+  bottom: 0;
 }
 .footer-text {
   font-size: 1.6rem;
