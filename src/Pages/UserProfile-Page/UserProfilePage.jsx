@@ -116,7 +116,7 @@ const UserProfilePage = () => {
     }
 
     if (success) {
-      successToast('User Updated')
+      successToast('User Details Updated')
     }
   }, [userInfo, error, success, dispatch, navigate])
   console.log(success)

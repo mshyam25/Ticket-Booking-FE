@@ -106,7 +106,7 @@ const PasswordResetPage = () => {
                 : ''}
             </span>
 
-            <Button type='submit'>Sign in</Button>
+            <Button type='submit'>Reset Password</Button>
           </form>
         )}
       </div>
