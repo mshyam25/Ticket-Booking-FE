@@ -129,6 +129,7 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2.4rem 4.8rem rgba(32, 27, 27, 0.1);
+  width: 50rem;
 }
 
 .payment-container {
@@ -403,7 +404,12 @@
   border-top: solid 1px #aaa;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  width: 100%;
   bottom: 0;
+  padding-top: 0.8rem;
+  background-color: #333;
+  color: #fff;
 }
 .footer-text {
   font-size: 1.6rem;
