@@ -17,8 +17,10 @@ import 'react-toastify/dist/ReactToastify.css'
 const PasswordResetPage = () => {
   const dispatch = useDispatch()
   const params = useParams()
+
   const userUpdate = useSelector((state) => state.userUpdate)
   const { loading, error, success, updatedUser } = userUpdate
+
   const textFieldStyles = { style: { fontSize: 18 } }
   const formValidation = yup.object({
     password: yup
